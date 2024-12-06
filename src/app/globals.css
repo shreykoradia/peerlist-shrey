@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: rgb(255, 255, 255); /* #FFFFFF */
+
+    --primary: rgb(255, 255, 255); /* #FFFFFF */
+    --primary-dark: rgb(13, 13, 13); /* #0D0D0D */
+
+    --secondary: rgb(247, 249, 251); /* #F7F9FB */
+    --secondary-foreground: rgb(225, 228, 232); /* #E1E4E8 */
+    --secondary-dark: rgb(106, 115, 125); /* #6A737D */
+    --secondary-light: rgb(250, 251, 252); /* #FAFBFC */
+    --secondary-disabled: rgb(246, 248, 250); /* #F6F8FA */
+    --secondary-input: rgb(149, 157, 165); /* #959DA5 */
+
+    --accent: rgb(0, 170, 69); /* #00AA45 */
+    --accent-foreground: rgb(30, 135, 75); /* #1E874B */
+
+    --destructive: rgb(235, 87, 87); /* #EB5757 */
+  }
+}

@@ -1,3 +1,10 @@
+import { Button } from "@/shared/ui/button";
+
 export default function Home() {
-  return <div className="text-red-500 text-2xl">Peerlist Coding Round!!</div>;
+  return (
+    <div className="p-4 flex gap-4">
+      <Button variant={"default"}>Click Peerlist</Button>
+      <Button variant={"outline"}>Click Peerlist</Button>
+    </div>
+  );
 }
