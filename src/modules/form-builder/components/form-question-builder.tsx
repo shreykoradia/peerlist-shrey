@@ -74,6 +74,7 @@ function FormQuestionBuilder() {
                             menuOption.find((opt) => opt.value === option) ||
                             ({} as MenuOptionProp);
                           updateQuestion(quest.id, {
+                            type: selectedOption.value,
                             selectedOption: selectedOption,
                           });
                         }}
