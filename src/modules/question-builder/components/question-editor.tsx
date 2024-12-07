@@ -35,46 +35,22 @@ const QuestionEditorBody = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
-    value: string;
-    onChange: (value: string) => void;
     options?: RadioGroupOptionProp[];
     onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
   }
->(
-  (
-    {
-      className,
-      type,
-      value,
-      onChange,
-      options = [],
-      onOptionsChange,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <div
-        ref={ref}
-        className={cn("text-xs font-normal", className)}
-        {...props}
-      >
-        {type === "short" && <ShortAnswer value={value} onChange={onChange} />}
-        {type === "long" && <LongAnswer value={value} onChange={onChange} />}
-        {type === "url" && <URLInput value={value} onChange={onChange} />}
-        {type === "date" && <DateInput value={value} onChange={onChange} />}
-        {type === "singleSelect" && (
-          <SingleSelect
-            value={value}
-            onChange={onChange}
-            options={options}
-            onOptionsChange={onOptionsChange}
-          />
-        )}
-      </div>
-    );
-  }
-);
+>(({ className, type, options = [], onOptionsChange, ...props }, ref) => {
+  return (
+    <div ref={ref} className={cn("text-xs font-normal", className)} {...props}>
+      {type === "short" && <ShortAnswer />}
+      {type === "long" && <LongAnswer />}
+      {type === "url" && <URLInput />}
+      {type === "date" && <DateInput />}
+      {type === "singleSelect" && (
+        <SingleSelect options={options} onOptionsChange={onOptionsChange} />
+      )}
+    </div>
+  );
+});
 QuestionEditorBody.displayName = "QuestionEditorBody";
 
 export { QuestionEditor, QuestionEditorHeader, QuestionEditorBody };

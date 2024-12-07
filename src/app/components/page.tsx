@@ -22,10 +22,6 @@ export default function Home() {
   );
   const [options, setOptions] = useState<RadioGroupOptionProp[]>([]);
 
-  const [answer, setAnswer] = useState<string>("");
-
-  const [isFormPublished, setIsFormPublished] = useState<boolean>(false);
-
   const addNewRadioOption = (options: RadioGroupOptionProp[]) => {
     setOptions(options);
   };
@@ -75,8 +71,6 @@ export default function Home() {
         </QuestionEditorHeader>
         <QuestionEditorBody
           type={selectedOption.value}
-          value={answer}
-          onChange={(value) => setAnswer(value as string)}
           options={
             selectedOption.value === "singleSelect" ? options : undefined
           }

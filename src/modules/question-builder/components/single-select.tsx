@@ -5,11 +5,9 @@ import PlusIcon from "@/assets/icons/plus.svg";
 import { RadioGroupOptionProp } from "@/types/types";
 
 const SingleSelect: React.FC<{
-  value: string;
-  onChange: (value: string) => void;
   options?: RadioGroupOptionProp[];
   onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
-}> = ({ value, onChange, options = [], onOptionsChange }) => {
+}> = ({ options = [], onOptionsChange }) => {
   //  i might give two initial options for better ux
   if (options.length < 2) {
     options = [
@@ -42,7 +40,7 @@ const SingleSelect: React.FC<{
 
   return (
     <div className="w-full space-y-2">
-      <RadioGroup value={value} onValueChange={onChange}>
+      <RadioGroup>
         {options.map((option, index) => (
           <div key={option.id} className="flex items-center space-x-2">
             <RadioGroupItem value={option.id} id={option.id} />
