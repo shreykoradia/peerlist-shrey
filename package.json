@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-radio-group": "^1.2.1",
     "@radix-ui/react-select": "^2.1.2",
     "next": "15.0.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

@@ -41,6 +41,7 @@ export default {
           foreground: "var(--secondary-foreground)",
           dark: "var(--secondary-dark)",
           light: "var(--secondary-light)",
+          disabled: "var(--secondary-disabled)",
         },
         accent: {
           DEFAULT: "var(--accent)",

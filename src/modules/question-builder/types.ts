@@ -10,3 +10,5 @@ export interface Question {
 
 export type OnChangeQuestion = (updatedQuestion: Question) => void;
 export type OnRemoveQuestion = (id: string) => void;
+
+

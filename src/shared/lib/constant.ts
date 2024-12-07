@@ -17,25 +17,25 @@ export const QUESTION_TYPE = {
 export const menuOption: MenuOptionProp[] = [
   {
     value: QUESTION_TYPE.SHORT_ANSWER,
-    label: "Short Answer",
+    label: "Short answer",
     icon: ShortAnswerIcon,
   },
   {
     value: QUESTION_TYPE.LONG_ANSWER,
-    label: "Long Answer",
+    label: "Long answer",
     icon: LongAnswerIcon,
   },
   {
+    value: QUESTION_TYPE.SINGLE_SELECT,
+    label: "Single select",
+    icon: SingleSelectIcon,
+  },
+  {
     value: QUESTION_TYPE.URL,
-    label: "Url",
+    label: "URL",
     icon: UrlIcon,
   },
 
-  {
-    value: QUESTION_TYPE.SINGLE_SELECT,
-    label: "Single Select",
-    icon: SingleSelectIcon,
-  },
   {
     value: QUESTION_TYPE.DATE,
     label: "Date",
