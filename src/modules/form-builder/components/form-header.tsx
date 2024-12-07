@@ -12,6 +12,8 @@ function FormHeader() {
   const form = useFormStore((state) => state.form);
   const updateFormTitle = useFormStore((state) => state.updateFormTitle);
 
+  console.log({ line14: form });
+
   return (
     <>
       <div className="px-6 w-full py-4 border-b border-b-secondary-foreground flex items-center justify-between">

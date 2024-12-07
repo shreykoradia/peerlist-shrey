@@ -27,23 +27,28 @@ export const useFormStore = create<FormProp>((set) => ({
       }
       return state;
     }),
-  addQuestion: () =>
-    set((state) => ({
-      form: {
-        ...state.form,
-        questions: [
-          ...state.form.questions,
-          {
-            id: crypto.randomUUID(),
-            questionText: "",
-            questionDesc: "",
-            type: menuOption[0].value,
-            selectedOption: menuOption[0] as MenuOptionProp,
-            radioOptions: [],
-          },
-        ],
-      },
-    })),
+  addQuestion: (type) =>
+    set((state) => {
+      const selectedOption = menuOption.find(
+        (opt) => opt.value === type
+      ) as MenuOptionProp;
+      return {
+        form: {
+          ...state.form,
+          questions: [
+            ...state.form.questions,
+            {
+              id: crypto.randomUUID(),
+              questionText: "",
+              questionDesc: "",
+              type: type,
+              selectedOption: selectedOption,
+              radioOptions: [],
+            },
+          ],
+        },
+      };
+    }),
   removeQuestion: (questionId: string) =>
     set((state) => ({
       form: {

@@ -34,7 +34,9 @@ export type FormProp = {
     isFormInPreview: boolean;
   };
   updateFormTitle: (formId: string, title: string) => void;
-  addQuestion: (type: string) => void;
+  addQuestion: (
+    type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE]
+  ) => void;
   removeQuestion: (id: string) => void;
   updateQuestion: (id: string, updatedProps: Partial<QuestionProp>) => void;
   updateRadioOption: (
