@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/tailwind-merge";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-medium shadow-sm",
+  "inline-flex items-center justify-center whitespace-nowrap font-medium shadow-sm focus:outline-none",
   {
     variants: {
       variant: {

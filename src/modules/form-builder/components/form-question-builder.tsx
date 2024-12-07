@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 import QuestionTypeMenu from "@/modules/question-builder/components/menu";
 import {
@@ -112,4 +112,4 @@ function FormQuestionBuilder() {
   );
 }
 
-export default FormQuestionBuilder;
+export default memo(FormQuestionBuilder);
