@@ -8,7 +8,6 @@ import {
 } from "@/modules/question-builder/components/question-editor";
 
 import { useFormStore } from "@/shared/store/form";
-import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { menuOption } from "@/shared/lib/constant";
 
@@ -66,7 +65,7 @@ function FormQuestionBuilder() {
                         }
                       />
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-2">
                       <QuestionTypeMenu
                         selectedOption={quest.selectedOption}
                         selectedOptionIcon={quest.selectedOption.icon}
@@ -79,9 +78,7 @@ function FormQuestionBuilder() {
                           });
                         }}
                       />
-                      <Button variant={"icon"} size={"icon"}>
-                        <ReorderIcon />
-                      </Button>
+                      <ReorderIcon className="svg_secondary_stroke_muted" />
                     </div>
                   </div>
                 </QuestionEditorHeader>
@@ -100,7 +97,7 @@ function FormQuestionBuilder() {
                 />
               </QuestionEditor>
               {form.questions.length - 1 === index ? (
-                <div className="w-full flex justify-center">
+                <div className="w-full flex justify-center pb-2">
                   <AddQuestionMenu
                     handleOptionChange={(value) => addQuestion(value)}
                   />
