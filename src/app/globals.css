@@ -21,4 +21,8 @@
 
     --destructive: rgb(235, 87, 87); /* #EB5757 */
   }
+
+  body {
+    @apply h-screen overflow-hidden;
+  }
 }
