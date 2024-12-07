@@ -10,6 +10,25 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        maxXs: { max: "468px" },
+        maxSm: { max: "639px" },
+        maxMd: { max: "767px" },
+        maxXlg: { max: "992px" },
+        maxLg: { max: "1023px" },
+        maxXl: { max: "1279px" },
+        minMaxXxl: { min: "768px", max: "1366px" },
+        minMaxMdXl: { min: "1024px", max: "1366px" },
+        minMaxXl: { min: "1024px", max: "1100px" },
+        minMaxLg: { min: "1024px", max: "1279px" },
+        mac13Inch: { min: "1280px", max: "1365px" },
+        minMaxMd: { min: "768px", max: "1023px" },
+        minMaxSm: { min: "640px", max: "767px" },
+      },
       colors: {
         background: "var(--background)",
         primary: {
@@ -21,6 +40,7 @@ export default {
           DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
           dark: "var(--secondary-dark)",
+          light: "var(--secondary-light)",
         },
         accent: {
           DEFAULT: "var(--accent)",
