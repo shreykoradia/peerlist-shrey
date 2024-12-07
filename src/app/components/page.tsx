@@ -56,7 +56,6 @@ export default function Home() {
                 selectedOption={selectedOption}
                 selectedOptionIcon={selectedOption.icon}
                 handleOptionChange={(option) => {
-                  console.log({ option });
                   const selectedOption =
                     menuOption.find((opt) => opt.value === option) ||
                     ({} as MenuOptionProp);
