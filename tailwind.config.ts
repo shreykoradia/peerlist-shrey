@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { PluginAPI } from "tailwindcss/types/config";
 
 export default {
   content: [
@@ -41,6 +42,7 @@ export default {
           foreground: "var(--secondary-foreground)",
           dark: "var(--secondary-dark)",
           light: "var(--secondary-light)",
+          grey: "var(--secondary-grey)",
           disabled: "var(--secondary-disabled)",
         },
         accent: {
@@ -61,5 +63,21 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        ".svg_secondary_stroke_muted > path": {
+          stroke: "var(--secondary-grey)",
+        },
+
+        ".svg_secondary_stroke > g": {
+          stroke: "var(--secondary-grey)",
+        },
+
+        ".svg_secondary_stroke g path:nth-child(2)": {
+          fill: "var(--secondary-grey)",
+        },
+      });
+    },
+  ],
 } satisfies Config;

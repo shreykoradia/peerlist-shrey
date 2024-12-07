@@ -15,10 +15,15 @@
     --secondary-light: rgb(250, 251, 252); /* #FAFBFC */
     --secondary-disabled: rgb(246, 248, 250); /* #F6F8FA */
     --secondary-input: rgb(149, 157, 165); /* #959DA5 */
+    --secondary-grey: rgb(134, 134, 134); /* #868686 */
 
     --accent: rgb(0, 170, 69); /* #00AA45 */
     --accent-foreground: rgb(30, 135, 75); /* #1E874B */
 
     --destructive: rgb(235, 87, 87); /* #EB5757 */
+  }
+
+  body {
+    @apply h-screen overflow-hidden;
   }
 }

@@ -24,6 +24,7 @@ type QuestionProp = {
 export type FormProp = {
   form: {
     id: string;
+    formTitle: string;
     questions: QuestionProp[];
     createdAt: Date;
     updatedAt: Date;
@@ -32,7 +33,10 @@ export type FormProp = {
     isFormPublished: boolean;
     isFormInPreview: boolean;
   };
-  addQuestion: (type: string) => void;
+  updateFormTitle: (formId: string, title: string) => void;
+  addQuestion: (
+    type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE]
+  ) => void;
   removeQuestion: (id: string) => void;
   updateQuestion: (id: string, updatedProps: Partial<QuestionProp>) => void;
   updateRadioOption: (

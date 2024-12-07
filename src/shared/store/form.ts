@@ -5,6 +5,7 @@ import { menuOption } from "../lib/constant";
 export const useFormStore = create<FormProp>((set) => ({
   form: {
     id: crypto.randomUUID(),
+    formTitle: "Untitled Form",
     questions: [],
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -13,23 +14,41 @@ export const useFormStore = create<FormProp>((set) => ({
     isFormInPreview: false,
     isFormPublished: false,
   },
-  addQuestion: () =>
-    set((state) => ({
-      form: {
-        ...state.form,
-        questions: [
-          ...state.form.questions,
-          {
-            id: crypto.randomUUID(),
-            questionText: "",
-            questionDesc: "",
-            type: menuOption[0].value,
-            selectedOption: menuOption[0] as MenuOptionProp,
-            radioOptions: [],
+  updateFormTitle: (formId: string, title: string) =>
+    set((state) => {
+      if (state.form.id === formId) {
+        return {
+          form: {
+            ...state.form,
+            formTitle: title,
+            updatedAt: new Date(),
           },
-        ],
-      },
-    })),
+        };
+      }
+      return state;
+    }),
+  addQuestion: (type) =>
+    set((state) => {
+      const selectedOption = menuOption.find(
+        (opt) => opt.value === type
+      ) as MenuOptionProp;
+      return {
+        form: {
+          ...state.form,
+          questions: [
+            ...state.form.questions,
+            {
+              id: crypto.randomUUID(),
+              questionText: "",
+              questionDesc: "",
+              type: type,
+              selectedOption: selectedOption,
+              radioOptions: [],
+            },
+          ],
+        },
+      };
+    }),
   removeQuestion: (questionId: string) =>
     set((state) => ({
       form: {
