@@ -1,6 +1,7 @@
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group";
+
 import PlusIcon from "@/assets/icons/plus.svg";
 import { RadioGroupOptionProp } from "@/types/types";
 
@@ -27,7 +28,9 @@ const SingleSelect: React.FC<{
       value: "",
       isEditable: true,
     };
-    onOptionsChange && onOptionsChange([...options, newOption]);
+    if (onOptionsChange) {
+      onOptionsChange([...options, newOption]);
+    }
   };
 
   // Update an option's value
@@ -35,7 +38,9 @@ const SingleSelect: React.FC<{
     const updatedOptions = options.map((option) =>
       option.id === id ? { ...option, value: newValue } : option
     );
-    onOptionsChange && onOptionsChange(updatedOptions);
+    if (onOptionsChange) {
+      onOptionsChange(updatedOptions);
+    }
   };
 
   return (

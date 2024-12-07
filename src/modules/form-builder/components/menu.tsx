@@ -1,5 +1,7 @@
-import React from "react";
+import clsx from "clsx";
+
 import { menuOption } from "@/shared/lib/constant";
+import { buttonVariants } from "@/shared/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,31 +10,25 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "@/shared/ui/select";
-import { MenuOptionProp } from "@/types/types";
-import { buttonVariants } from "@/shared/ui/button";
-import clsx from "clsx";
 
-type QuestionTypeMenuProp = {
-  selectedOption: MenuOptionProp;
-  selectedOptionIcon: React.FC<React.SVGProps<SVGSVGElement>>;
-  handleOptionChange: (option: string) => void;
+import PlusIcon from "@/assets/icons/plus.svg";
+
+type AddQuestionMenuProp = {
+  handleOptionChange: (value: string) => void;
 };
 
-function QuestionTypeMenu({
-  selectedOption,
-  selectedOptionIcon: Icon,
-  handleOptionChange,
-}: QuestionTypeMenuProp) {
+function AddQuestionMenu({ handleOptionChange }: AddQuestionMenuProp) {
   return (
     <>
-      <Select
-        value={selectedOption.value}
-        onValueChange={(value) => handleOptionChange(value)}
-      >
+      <Select onValueChange={(value) => handleOptionChange(value)}>
         <SelectTrigger
-          className={clsx(buttonVariants({ variant: "icon", size: "icon" }))}
+          className={clsx(
+            "gap-1",
+            buttonVariants({ variant: "outline", size: "default" })
+          )}
         >
-          {<Icon />}
+          <PlusIcon className="my-1" />
+          Add Question
         </SelectTrigger>
         <SelectContent className="w-[300px]">
           <SelectGroup>
@@ -52,4 +48,4 @@ function QuestionTypeMenu({
   );
 }
 
-export default QuestionTypeMenu;
+export default AddQuestionMenu;
