@@ -23,8 +23,6 @@ function FormPreview() {
   const [isScrollable, setIsScrollable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  console.log({ isScrollable });
-
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -49,7 +47,7 @@ function FormPreview() {
         className="h-[calc(100vh_-_7.5rem)] overflow-y-auto"
       >
         <div className="p-6 h-full">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 pb-1">
             {form.questions.map((quest) => (
               <div
                 className={clsx("flex flex-col gap-1", {

@@ -1,6 +1,8 @@
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
+
+import clsx from "clsx";
 
 import QuestionTypeMenu from "@/modules/question-builder/components/menu";
 import {
@@ -18,9 +20,14 @@ import ReorderIcon from "@/assets/icons/reorder.svg";
 import { MenuOptionProp } from "@/types/types";
 
 import AddQuestionMenu from "./menu";
-import clsx from "clsx";
 
-function FormQuestionBuilder() {
+type FormQuestionBuilderProp = {
+  isScrollable?: boolean;
+};
+
+function FormQuestionBuilder({
+  isScrollable = false,
+}: FormQuestionBuilderProp) {
   const form = useFormStore((state) => state.form);
   const addQuestion = useFormStore((state) => state.addQuestion);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
@@ -33,7 +40,7 @@ function FormQuestionBuilder() {
           <AddQuestionMenu handleOptionChange={(value) => addQuestion(value)} />
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-1">
           {form.questions.map((quest, index) => (
             <React.Fragment key={quest.id}>
               <QuestionEditor
@@ -112,7 +119,7 @@ function FormQuestionBuilder() {
                   }
                 />
               </QuestionEditor>
-              {form.questions.length - 1 === index ? (
+              {!isScrollable && form.questions.length - 1 === index ? (
                 <div className="w-full flex justify-center pb-2">
                   <AddQuestionMenu
                     handleOptionChange={(value) => addQuestion(value)}
