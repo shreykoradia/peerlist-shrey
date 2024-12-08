@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
@@ -20,6 +20,18 @@ function FormPreview() {
   const form = useFormStore((state) => state.form);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
 
+  const [isScrollable, setIsScrollable] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  console.log({ isScrollable });
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      setIsScrollable(container.scrollHeight > container.clientHeight);
+    }
+  }, [form.questions]);
+
   const handleAnswerChange = (questId: string, answer: string) => {
     if (uiState.isFormPublished) {
       updateQuestion(questId, { answer: answer });
@@ -32,7 +44,10 @@ function FormPreview() {
       ) : (
         <FormHeader isPreviewMode={uiState.isFormInPreview} />
       )}
-      <div className="h-[calc(100vh_-_7.5rem)] overflow-y-auto">
+      <div
+        ref={containerRef}
+        className="h-[calc(100vh_-_7.5rem)] overflow-y-auto"
+      >
         <div className="p-6 h-full">
           <div className="flex flex-col gap-8">
             {form.questions.map((quest) => (
@@ -68,7 +83,7 @@ function FormPreview() {
                 />
               </div>
             ))}
-            {uiState.isFormPublished ? (
+            {uiState.isFormPublished && !isScrollable ? (
               <div className="flex justify-end">
                 <Button variant={"default"}>Submit</Button>
               </div>
@@ -76,7 +91,13 @@ function FormPreview() {
           </div>
         </div>
       </div>
-      {!uiState.isFormPublished ? <FormFooter /> : null}
+      {uiState.isFormPublished && isScrollable ? (
+        <div className="flex justify-end m-4">
+          <Button variant={"default"}>Submit</Button>
+        </div>
+      ) : (
+        <FormFooter />
+      )}
     </>
   );
 }

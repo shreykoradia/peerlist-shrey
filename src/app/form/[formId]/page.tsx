@@ -8,7 +8,6 @@ export default function FormViewPage({
   params: { formId: string };
   searchParams?: { [key: string]: string };
 }) {
-  // console.log({ params: params.formId, searchParams: searchParams?.mode });
   return (
     <Container>
       <FormPreview />

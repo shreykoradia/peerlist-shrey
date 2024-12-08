@@ -16,15 +16,10 @@ function FormFooter() {
   const publishForm = useFormStore((state) => state.publishForm);
   const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
 
-  const isFormPublished = useFormStore(
-    (state) => state.uiState.isFormPublished
-  );
-
-  useEffect(() => {
-    if (isFormPublished) {
-      navigate.replace(`form/${form.id}`);
-    }
-  }, [isFormPublished]);
+  const handlePublishedForm = () => {
+    publishForm();
+    navigate.replace(`form/${form.id}`);
+  };
 
   return (
     <>
@@ -41,7 +36,7 @@ function FormFooter() {
               toggleShowBanner();
               return;
             }
-            publishForm();
+            handlePublishedForm();
           }}
         >
           <CheckIcon className={"mt-0.5"} />
