@@ -12,7 +12,6 @@ import { QUESTION_TYPE } from "@/shared/lib/constant";
 import { useFormStore } from "@/shared/store/form";
 import Label from "@/shared/ui/label";
 import PublishedFormHeader from "@/modules/form-builder/components/form-publish-header";
-import PlubishFormFooter from "@/modules/form-builder/components/form-publish-footer";
 import { Button } from "@/shared/ui/button";
 
 function FormPreview() {
