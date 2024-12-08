@@ -68,9 +68,11 @@ function FormPreview() {
                 />
               </div>
             ))}
-            <div className="flex justify-end">
-              <Button variant={"default"}>Submit</Button>
-            </div>
+            {uiState.isFormPublished ? (
+              <div className="flex justify-end">
+                <Button variant={"default"}>Submit</Button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
