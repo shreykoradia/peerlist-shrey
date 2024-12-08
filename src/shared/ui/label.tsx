@@ -10,8 +10,8 @@ const labelVariants = cva("text-primary-dark", {
       description: "text-xs",
     },
     weight: {
-      semiBold: "font-semiBold",
-      bold: "font-bold",
+      semiBold: "font-semibold",
+      medium: "font-medium",
       normal: "font-normal",
     },
     defaultVariants: {

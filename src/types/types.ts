@@ -19,6 +19,7 @@ type QuestionProp = {
   type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
   selectedOption: MenuOptionProp;
   radioOptions: RadioGroupOptionProp[];
+  answer?: string;
 };
 
 export type FormProp = {

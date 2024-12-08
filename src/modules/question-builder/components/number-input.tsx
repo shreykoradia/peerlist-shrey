@@ -1,8 +1,16 @@
 import { Input } from "@/shared/ui/input";
 
-const NumberInput: React.FC = () => {
+type NumberInputProp = {
+  handleAnswerChange: (answer: string) => void;
+};
+
+const NumberInput: React.FC<NumberInputProp> = ({ handleAnswerChange }) => {
   return (
-    <Input type="number" className="h-8 border border-secondary-foreground" />
+    <Input
+      type="number"
+      className="h-8 border border-secondary-foreground"
+      onChange={(e) => handleAnswerChange(e.target.value)}
+    />
   );
 };
 

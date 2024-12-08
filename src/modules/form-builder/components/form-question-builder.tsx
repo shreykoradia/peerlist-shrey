@@ -18,7 +18,6 @@ import ReorderIcon from "@/assets/icons/reorder.svg";
 import { MenuOptionProp } from "@/types/types";
 
 import AddQuestionMenu from "./menu";
-import clsx from "clsx";
 
 function FormQuestionBuilder() {
   const form = useFormStore((state) => state.form);

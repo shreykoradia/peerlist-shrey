@@ -38,21 +38,70 @@ const QuestionEditorBody = React.forwardRef<
     type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
     options?: RadioGroupOptionProp[];
     onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
+    onAnswerChange?: (answer: string) => void;
+    isOnlyView?: boolean;
   }
->(({ className, type, options = [], onOptionsChange, ...props }, ref) => {
-  return (
-    <div ref={ref} className={cn("text-xs font-normal", className)} {...props}>
-      {type === QUESTION_TYPE.SHORT_ANSWER && <ShortAnswer />}
-      {type === QUESTION_TYPE.LONG_ANSWER && <LongAnswer />}
-      {type === QUESTION_TYPE.URL && <URLInput />}
-      {type === QUESTION_TYPE.NUMBER && <NumberInput />}
-      {type === QUESTION_TYPE.DATE && <DateInput />}
-      {type === QUESTION_TYPE.SINGLE_SELECT && (
-        <SingleSelect options={options} onOptionsChange={onOptionsChange} />
-      )}
-    </div>
-  );
-});
+>(
+  (
+    {
+      className,
+      type,
+      options = [],
+      onAnswerChange,
+      onOptionsChange,
+      isOnlyView = false,
+      ...props
+    },
+    ref
+  ) => {
+    const handleAnswerChange = (answer: string) => {
+      if (onAnswerChange) {
+        onAnswerChange(answer);
+      }
+    };
+    return (
+      <div
+        ref={ref}
+        className={cn("text-xs font-normal", className)}
+        {...props}
+      >
+        {type === QUESTION_TYPE.SHORT_ANSWER && (
+          <ShortAnswer
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+          />
+        )}
+        {type === QUESTION_TYPE.LONG_ANSWER && (
+          <LongAnswer
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+          />
+        )}
+        {type === QUESTION_TYPE.URL && (
+          <URLInput
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+          />
+        )}
+        {type === QUESTION_TYPE.NUMBER && (
+          <NumberInput
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+          />
+        )}
+        {type === QUESTION_TYPE.DATE && (
+          <DateInput
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+          />
+        )}
+        {type === QUESTION_TYPE.SINGLE_SELECT && (
+          <SingleSelect
+            options={options}
+            onOptionsChange={onOptionsChange}
+            handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+            isOnlyView={isOnlyView}
+          />
+        )}
+      </div>
+    );
+  }
+);
 QuestionEditorBody.displayName = "QuestionEditorBody";
 
 export { QuestionEditor, QuestionEditorHeader, QuestionEditorBody };

@@ -13,7 +13,7 @@ const buttonVariants = cva(
         outline:
           "bg-primary text-primary-dark border border-secondary-foreground",
 
-        icon: "hover:text-accent focus:outline-none focus:ring-0",
+        icon: "hover:text-accent focus:outline-none focus:ring-none",
       },
       size: {
         default: "h-8 py-1.5 rounded-xl pr-4 pl-[0.875rem]",

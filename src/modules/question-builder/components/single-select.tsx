@@ -4,11 +4,21 @@ import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group";
 
 import PlusIcon from "@/assets/icons/plus.svg";
 import { RadioGroupOptionProp } from "@/types/types";
+import Label from "@/shared/ui/label";
 
-const SingleSelect: React.FC<{
+type SingleSelectProp = {
   options?: RadioGroupOptionProp[];
   onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
-}> = ({ options = [], onOptionsChange }) => {
+  handleAnswerChange: (answer: string) => void;
+  isOnlyView: boolean;
+};
+
+const SingleSelect: React.FC<SingleSelectProp> = ({
+  options = [],
+  onOptionsChange,
+  isOnlyView,
+  handleAnswerChange,
+}) => {
   //  i might give two initial options for better ux
   if (options.length < 2) {
     options = [
@@ -45,23 +55,31 @@ const SingleSelect: React.FC<{
 
   return (
     <div className="w-full space-y-2">
-      <RadioGroup>
+      <RadioGroup onValueChange={(value) => handleAnswerChange(value)}>
         {options.map((option, index) => (
           <div key={option.id} className="flex items-center space-x-2">
             <RadioGroupItem value={option.id} id={option.id} />
-            <Input
-              id={option.id}
-              value={option.value}
-              readOnly={!option.isEditable}
-              onChange={(e) => handleUpdateOption(option.id, e.target.value)}
-              placeholder="Enter option..."
-              className="w-full p-1 text-sm font-normal"
-            />
-            {options.length - 1 === index ? (
-              <Button variant={"icon"} size={"icon"} onClick={handleAddOption}>
-                <PlusIcon />
-              </Button>
-            ) : null}
+            {isOnlyView ? (
+              <Label text={option.value} />
+            ) : (
+              <>
+                <Input
+                  id={option.id}
+                  value={option.value}
+                  readOnly={!option.isEditable}
+                  onChange={(e) =>
+                    handleUpdateOption(option.id, e.target.value)
+                  }
+                  placeholder="Enter option..."
+                  className="w-full p-1 text-sm font-normal"
+                />
+                {options.length - 1 === index ? (
+                  <button onClick={handleAddOption}>
+                    <PlusIcon />
+                  </button>
+                ) : null}
+              </>
+            )}
           </div>
         ))}
       </RadioGroup>
