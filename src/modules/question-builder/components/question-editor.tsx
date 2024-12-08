@@ -7,6 +7,7 @@ import DateInput from "./date-input";
 import SingleSelect from "./single-select";
 import { QUESTION_TYPE } from "@/shared/lib/constant";
 import { RadioGroupOptionProp } from "@/types/types";
+import NumberInput from "./number-input";
 
 const QuestionEditor = React.forwardRef<
   HTMLDivElement,
@@ -41,11 +42,12 @@ const QuestionEditorBody = React.forwardRef<
 >(({ className, type, options = [], onOptionsChange, ...props }, ref) => {
   return (
     <div ref={ref} className={cn("text-xs font-normal", className)} {...props}>
-      {type === "short" && <ShortAnswer />}
-      {type === "long" && <LongAnswer />}
-      {type === "url" && <URLInput />}
-      {type === "date" && <DateInput />}
-      {type === "singleSelect" && (
+      {type === QUESTION_TYPE.SHORT_ANSWER && <ShortAnswer />}
+      {type === QUESTION_TYPE.LONG_ANSWER && <LongAnswer />}
+      {type === QUESTION_TYPE.URL && <URLInput />}
+      {type === QUESTION_TYPE.NUMBER && <NumberInput />}
+      {type === QUESTION_TYPE.DATE && <DateInput />}
+      {type === QUESTION_TYPE.SINGLE_SELECT && (
         <SingleSelect options={options} onOptionsChange={onOptionsChange} />
       )}
     </div>
