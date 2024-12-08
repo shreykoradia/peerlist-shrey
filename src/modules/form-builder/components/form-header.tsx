@@ -13,19 +13,22 @@ function FormHeader() {
   const updateFormTitle = useFormStore((state) => state.updateFormTitle);
 
   return (
-    <>
-      <div className="px-6 w-full py-4 border-b border-b-secondary-foreground flex items-center justify-between">
-        <Input
-          value={form.formTitle}
-          onChange={(e) => updateFormTitle(form.id, e.target.value)}
-          className="font-semibold text-base w-2/3 focus:!outline-none focus:!shadow-none"
-        />
-        <Button variant={"outline"} className="gap-1">
-          Preview
-          <OpenIcon className="mt-0.5" />
-        </Button>
-      </div>
-    </>
+    <div className="px-6 w-full py-4 border-b border-b-secondary-foreground flex items-center justify-between">
+      <Input
+        value={form.formTitle}
+        onChange={(e) => updateFormTitle(form.id, e.target.value)}
+        className="font-semibold text-base w-2/3 focus:!outline-none focus:!shadow-none"
+        onBlur={(e) => {
+          if (e.target.value.length === 0 || !e.target.value) {
+            updateFormTitle(form.id, "Still it is an untitled form :)");
+          }
+        }}
+      />
+      <Button variant={"outline"} className="gap-1">
+        Preview
+        <OpenIcon className="mt-0.5" />
+      </Button>
+    </div>
   );
 }
 
