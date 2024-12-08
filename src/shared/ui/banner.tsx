@@ -18,7 +18,7 @@ const bannerVaraints = cva(
         "top-right": "top-4 right-4",
       },
       defaultVariants: {
-        varaiant: "success",
+        variant: "success",
         position: "top",
       },
     },

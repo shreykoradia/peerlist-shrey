@@ -3,9 +3,10 @@
 import FormBuilder from "@/modules/form-builder/components";
 
 import { useFormStore } from "@/shared/store/form";
-import Container from "@/shared/ui/container";
+
+import FormPreview from "./form-viewer";
 
 export default function FormPage() {
   const uiState = useFormStore((state) => state.uiState);
-  return <>{uiState.isFormInPreview ? "preview" : <FormBuilder />}</>;
+  return <>{uiState.isFormInPreview ? <FormPreview /> : <FormBuilder />}</>;
 }
