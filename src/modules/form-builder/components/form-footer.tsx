@@ -11,7 +11,7 @@ function FormFooter() {
   return (
     <>
       <div className="w-full flex justify-between items-center border-t border-t-secondary-foreground px-6 py-4 bg-secondary">
-        <Button variant={"outline"} className="gap-1">
+        <Button disabled variant={"outline"} className="gap-1">
           <DraftIcon />
           Save as draft
         </Button>

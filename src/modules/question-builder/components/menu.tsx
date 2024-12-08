@@ -16,7 +16,7 @@ import { MenuOptionProp } from "@/types/types";
 import clsx from "clsx";
 
 type QuestionTypeMenuProp = {
-  selectedOption: MenuOptionProp;
+selectedOption: MenuOptionProp;
   selectedOptionIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   handleOptionChange: (option: string) => void;
 };

@@ -83,7 +83,7 @@ export const useFormStore = create<FormProp>((set) => ({
     set((state) => ({
       uiState: {
         ...state.uiState,
-        isFormInPreviewMode: !state.uiState.isFormInPreview,
+        isFormInPreview: !state.uiState.isFormInPreview,
       },
     })),
   publishForm: () =>

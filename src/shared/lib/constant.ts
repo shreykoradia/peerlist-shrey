@@ -48,3 +48,5 @@ export const menuOption: MenuOptionProp[] = [
     icon: DateIcon,
   },
 ];
+
+export const PREVIEW = "preview";

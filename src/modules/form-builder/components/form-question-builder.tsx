@@ -1,3 +1,5 @@
+"use client";
+
 import React, { memo } from "react";
 
 import QuestionTypeMenu from "@/modules/question-builder/components/menu";
@@ -16,6 +18,7 @@ import ReorderIcon from "@/assets/icons/reorder.svg";
 import { MenuOptionProp } from "@/types/types";
 
 import AddQuestionMenu from "./menu";
+import clsx from "clsx";
 
 function FormQuestionBuilder() {
   const form = useFormStore((state) => state.form);
@@ -42,8 +45,8 @@ function FormQuestionBuilder() {
                     <div className="w-full">
                       <Input
                         type="text"
-                        name="=questionText"
-                        className="text-sm font-semibold p-1"
+                        name="questionText"
+                        className="text-sm font-semibold mb-1 !p-0 !pl-1"
                         value={quest.questionText}
                         placeholder="Write a question..."
                         onChange={(e) =>
@@ -55,7 +58,7 @@ function FormQuestionBuilder() {
                       <Input
                         type="text"
                         name="description"
-                        className="text-xs font-normal p-1"
+                        className="text-xs font-normal !p-0 !pl-1"
                         value={quest.questionDesc}
                         placeholder="Write a question description..."
                         onChange={(e) =>
