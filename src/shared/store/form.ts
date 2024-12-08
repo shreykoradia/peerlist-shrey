@@ -146,4 +146,19 @@ export const useFormStore = create<FormProp>((set, get) => ({
     set((state) => ({
       uiState: { ...state.uiState, showBanner: !state.uiState.showBanner },
     })),
+
+  reorderQuestions: (sourceIndex, destinationIndex) =>
+    set((state) => {
+      const updatedQuestions = Array.from(state.form.questions);
+      const [removed] = updatedQuestions.splice(sourceIndex, 1);
+      updatedQuestions.splice(destinationIndex, 0, removed);
+
+      return {
+        form: {
+          ...state.form,
+          questions: updatedQuestions,
+          updatedAt: new Date(),
+        },
+      };
+    }),
 }));

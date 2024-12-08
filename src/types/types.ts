@@ -50,4 +50,5 @@ export type FormProp = {
   togglePreviewMode: () => void;
   publishForm: () => void;
   toggleShowBanner: () => void;
+  reorderQuestions: (sourceIndex: number, destinationIndex: number) => void;
 };
