@@ -3,6 +3,7 @@ import LongAnswerIcon from "@/assets/icons/long_answer.svg";
 import UrlIcon from "@/assets/icons/url.svg";
 import DateIcon from "@/assets/icons/date.svg";
 import SingleSelectIcon from "@/assets/icons/single_select.svg";
+import NumberIcon from "@/assets/icons/hash.svg";
 import { MenuOptionProp } from "@/types/types";
 
 export const QUESTION_TYPE = {
@@ -29,6 +30,11 @@ export const menuOption: MenuOptionProp[] = [
     value: QUESTION_TYPE.SINGLE_SELECT,
     label: "Single select",
     icon: SingleSelectIcon,
+  },
+  {
+    value: QUESTION_TYPE.NUMBER,
+    label: "Number",
+    icon: NumberIcon,
   },
   {
     value: QUESTION_TYPE.URL,
