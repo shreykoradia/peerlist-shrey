@@ -1,8 +1,10 @@
 import FormFooter from "@/modules/form-builder/components/form-footer";
 import FormHeader from "@/modules/form-builder/components/form-header";
 import { QuestionEditorBody } from "@/modules/question-builder/components/question-editor";
+import { QUESTION_TYPE } from "@/shared/lib/constant";
 import { useFormStore } from "@/shared/store/form";
 import Label from "@/shared/ui/label";
+import clsx from "clsx";
 import React from "react";
 
 function FormPreview() {
@@ -22,7 +24,12 @@ function FormPreview() {
         <div className="p-6 h-full">
           <div className="flex flex-col gap-8">
             {form.questions.map((quest) => (
-              <div className="flex flex-col gap-1" key={quest.id}>
+              <div
+                className={clsx("flex flex-col gap-1", {
+                  "gap-4": quest.type === QUESTION_TYPE.SINGLE_SELECT,
+                })}
+                key={quest.id}
+              >
                 <div className="flex flex-col gap-1">
                   <Label
                     variant={"subHeader"}

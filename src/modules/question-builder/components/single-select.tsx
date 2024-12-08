@@ -5,9 +5,10 @@ import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group";
 import Label from "@/shared/ui/label";
 
 import PlusIcon from "@/assets/icons/plus.svg";
-import CancelIcon from "@/assets/icons/cancel.svg";
+import DeleteIcon from "@/assets/icons/delete.svg";
 
 import { RadioGroupOptionProp } from "@/types/types";
+import { Button } from "@/shared/ui/button";
 
 type SingleSelectProp = {
   options?: RadioGroupOptionProp[];
@@ -24,18 +25,6 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
   handleAnswerChange,
   isError,
 }) => {
-  //  i might give two initial options for better ux
-  if (options.length < 2) {
-    options = [
-      { id: crypto.randomUUID(), value: "hire me !", isEditable: true },
-      {
-        id: crypto.randomUUID(),
-        value: "we will build great things together",
-        isEditable: true,
-      },
-    ];
-  }
-
   // Function to add a new option
   const handleAddOption = () => {
     const newOption: RadioGroupOptionProp = {
@@ -69,6 +58,15 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
   return (
     <div className="w-full space-y-2">
       <RadioGroup onValueChange={(value) => handleAnswerChange(value)}>
+        {options.length === 0 ? (
+          <Button
+            variant={"default"}
+            className="gap-1"
+            onClick={handleAddOption}
+          >
+            <PlusIcon className="svg_secondary_fill_white" /> Add Option
+          </Button>
+        ) : null}
         {options.map((option, index) => (
           <div key={option.id} className="flex items-center space-x-2">
             <RadioGroupItem value={option.id} id={option.id} />
@@ -97,7 +95,7 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
                     className="absolute right-0 top-1.5"
                     onClick={() => handleDeleteOption(option.id)}
                   >
-                    <CancelIcon className="svg_secondary_fill_black" />
+                    <DeleteIcon />
                   </button>
                 </div>
                 {options.length - 1 === index ? (

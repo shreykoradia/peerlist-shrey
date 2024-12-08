@@ -120,21 +120,20 @@ export const useFormStore = create<FormProp>((set, get) => ({
           isFormInPreview: !state.uiState.isFormInPreview,
         },
       }));
-    } else {
+    }
+  },
+
+  publishForm: () => {
+    const isValid = get().validateQuestions();
+    if (isValid) {
       set((state) => ({
         uiState: {
           ...state.uiState,
-          showBanner: !state.uiState.showBanner,
+          isFormPublished: !state.uiState.isFormPublished,
         },
       }));
     }
   },
-
-  publishForm: () =>
-    set((state) => ({
-      uiState: { ...state.uiState, isFormPublished: true },
-      form: { ...state.form, updatedAt: new Date() },
-    })),
 
   toggleShowBanner: () =>
     set((state) => ({
