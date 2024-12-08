@@ -18,13 +18,12 @@ function FormHeader({ isPreviewMode = false }: FormHeaderProp) {
   const form = useFormStore((state) => state.form);
   const updateFormTitle = useFormStore((state) => state.updateFormTitle);
   const togglePreviewMode = useFormStore((state) => state.togglePreviewMode);
-
-  const [banner, setBanner] = useState<boolean>(false);
+  const showBanner = useFormStore((state) => state.uiState.showBanner);
+  const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
 
   const handlePreviewClick = () => {
     if (form.questions.length === 0) {
-      setBanner(!banner);
-      setTimeout(() => setBanner(false), 3000);
+      toggleShowBanner();
       return;
     }
     togglePreviewMode();
@@ -57,12 +56,12 @@ function FormHeader({ isPreviewMode = false }: FormHeaderProp) {
           <OpenIcon className="mt-0.5" />
         </Button>
       </div>
-      {banner ? (
+      {showBanner ? (
         <Banner
           variant={"error"}
           position={"top-right"}
-          bannerMessage="No questions added yet. Add questions to preview your form."
-          onClose={() => setBanner(!banner)}
+          bannerMessage="No questions added yet. Add questions to preview or publish your form."
+          onClose={() => toggleShowBanner()}
         />
       ) : null}
     </>

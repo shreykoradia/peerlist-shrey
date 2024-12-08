@@ -1,11 +1,19 @@
+"use client";
+
+import React from "react";
+
+import clsx from "clsx";
+
 import FormFooter from "@/modules/form-builder/components/form-footer";
 import FormHeader from "@/modules/form-builder/components/form-header";
 import { QuestionEditorBody } from "@/modules/question-builder/components/question-editor";
+
 import { QUESTION_TYPE } from "@/shared/lib/constant";
 import { useFormStore } from "@/shared/store/form";
 import Label from "@/shared/ui/label";
-import clsx from "clsx";
-import React from "react";
+import PublishedFormHeader from "@/modules/form-builder/components/form-publish-header";
+import PlubishFormFooter from "@/modules/form-builder/components/form-publish-footer";
+import { Button } from "@/shared/ui/button";
 
 function FormPreview() {
   const uiState = useFormStore((state) => state.uiState);
@@ -19,7 +27,11 @@ function FormPreview() {
   };
   return (
     <>
-      <FormHeader isPreviewMode={uiState.isFormInPreview} />
+      {uiState.isFormPublished ? (
+        <PublishedFormHeader />
+      ) : (
+        <FormHeader isPreviewMode={uiState.isFormInPreview} />
+      )}
       <div className="h-[calc(100vh_-_7.5rem)] overflow-y-auto">
         <div className="p-6 h-full">
           <div className="flex flex-col gap-8">
@@ -56,10 +68,13 @@ function FormPreview() {
                 />
               </div>
             ))}
+            <div className="flex justify-end">
+              <Button variant={"default"}>Submit</Button>
+            </div>
           </div>
         </div>
       </div>
-      <FormFooter />
+      {!uiState.isFormPublished ? <FormFooter /> : null}
     </>
   );
 }

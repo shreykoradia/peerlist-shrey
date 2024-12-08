@@ -14,6 +14,8 @@ function FormFooter() {
 
   const form = useFormStore((state) => state.form);
   const publishForm = useFormStore((state) => state.publishForm);
+  const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
+
   const isFormPublished = useFormStore(
     (state) => state.uiState.isFormPublished
   );
@@ -31,7 +33,17 @@ function FormFooter() {
           <DraftIcon />
           Save as draft
         </Button>
-        <Button variant={"default"} className="gap-1" onClick={publishForm}>
+        <Button
+          variant={"default"}
+          className="gap-1"
+          onClick={() => {
+            if (form.questions.length === 0) {
+              toggleShowBanner();
+              return;
+            }
+            publishForm();
+          }}
+        >
           <CheckIcon className={"mt-0.5"} />
           Publish form
         </Button>
