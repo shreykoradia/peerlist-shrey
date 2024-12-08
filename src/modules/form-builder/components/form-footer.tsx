@@ -1,21 +1,54 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/shared/ui/button";
 
 import DraftIcon from "@/assets/icons/draft.svg";
 import CheckIcon from "@/assets/icons/check.svg";
+import { useFormStore } from "@/shared/store/form";
+import AddQuestionMenu from "./menu";
 
-function FormFooter() {
+type FormFooterProp = {
+  isScrollable?: boolean;
+};
+
+function FormFooter({ isScrollable }: FormFooterProp) {
+  const navigate = useRouter();
+
+  const form = useFormStore((state) => state.form);
+  const addQuestion = useFormStore((state) => state.addQuestion);
+  const uiState = useFormStore((state) => state.uiState);
+  const publishForm = useFormStore((state) => state.publishForm);
+  const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
+
+  const handlePublishedForm = () => {
+    publishForm();
+    navigate.replace(`form/${form.id}`);
+  };
+
   return (
     <>
       <div className="w-full flex justify-between items-center border-t border-t-secondary-foreground px-6 py-4 bg-secondary">
-        <Button variant={"outline"} className="gap-1">
-          <DraftIcon />
+        <Button disabled variant={"outline"} className="gap-1">
+          <DraftIcon className="mt-0.5" />
           Save as draft
         </Button>
-        <Button variant={"default"} className="gap-1">
+        {isScrollable && !uiState.isFormInPreview ? (
+          <AddQuestionMenu handleOptionChange={(value) => addQuestion(value)} />
+        ) : null}
+        <Button
+          variant={"default"}
+          className="gap-1"
+          onClick={() => {
+            if (form.questions.length === 0) {
+              toggleShowBanner();
+              return;
+            }
+            handlePublishedForm();
+          }}
+        >
           <CheckIcon className={"mt-0.5"} />
           Publish form
         </Button>

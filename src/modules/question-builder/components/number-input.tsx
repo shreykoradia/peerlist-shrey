@@ -1,17 +1,17 @@
 import { Input } from "@/shared/ui/input";
 
-type URLInputProp = {
+type NumberInputProp = {
   handleAnswerChange: (answer: string) => void;
 };
 
-const URLInput: React.FC<URLInputProp> = ({ handleAnswerChange }) => {
+const NumberInput: React.FC<NumberInputProp> = ({ handleAnswerChange }) => {
   return (
     <Input
-      type="url"
+      type="number"
       className="h-8 border border-secondary-foreground"
       onChange={(e) => handleAnswerChange(e.target.value)}
     />
   );
 };
 
-export default URLInput;
+export default NumberInput;

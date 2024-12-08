@@ -1,8 +1,8 @@
 import { FormProp, MenuOptionProp, RadioGroupOptionProp } from "@/types/types";
 import { create } from "zustand";
-import { menuOption } from "../lib/constant";
+import { menuOption, QUESTION_TYPE } from "../lib/constant";
 
-export const useFormStore = create<FormProp>((set) => ({
+export const useFormStore = create<FormProp>((set, get) => ({
   form: {
     id: crypto.randomUUID(),
     formTitle: "Untitled Form",
@@ -13,6 +13,43 @@ export const useFormStore = create<FormProp>((set) => ({
   uiState: {
     isFormInPreview: false,
     isFormPublished: false,
+    showBanner: false,
+  },
+  validateQuestions: () => {
+    const state = get();
+    const updatedQuestions = state.form.questions.map((question) => {
+      let error = "";
+
+      if (question.type === QUESTION_TYPE.SINGLE_SELECT) {
+        const invalidOptions = question.radioOptions.filter(
+          (option) => option.value.trim() === ""
+        );
+
+        if (question.radioOptions.length === 0) {
+          error = "Empty options are not allowed";
+        }
+
+        if (invalidOptions.length > 0) {
+          error = "All options must have valid values.";
+        }
+      }
+
+      if (!question.questionText.trim()) {
+        error = "Question text cannot be empty.";
+      }
+
+      return { ...question, error };
+    });
+
+    set((state) => ({
+      form: {
+        ...state.form,
+        questions: updatedQuestions,
+        updatedAt: new Date(),
+      },
+    }));
+
+    return updatedQuestions.every((q) => !q.error);
   },
   updateFormTitle: (formId: string, title: string) =>
     set((state) => {
@@ -74,21 +111,54 @@ export const useFormStore = create<FormProp>((set) => ({
       form: {
         ...state.form,
         questions: state.form.questions.map((quest) =>
-          quest.id === questionId ? { ...quest, radioOptions: options } : quest
+          quest.id === questionId
+            ? { ...quest, radioOptions: options, error: "" }
+            : quest
         ),
         updatedAt: new Date(),
       },
     })),
-  togglePreviewMode: () =>
+  togglePreviewMode: () => {
+    const isValid = get().validateQuestions();
+    if (isValid) {
+      set((state) => ({
+        uiState: {
+          ...state.uiState,
+          isFormInPreview: !state.uiState.isFormInPreview,
+        },
+      }));
+    }
+  },
+
+  publishForm: () => {
+    const isValid = get().validateQuestions();
+    if (isValid) {
+      set((state) => ({
+        uiState: {
+          ...state.uiState,
+          isFormPublished: !state.uiState.isFormPublished,
+        },
+      }));
+    }
+  },
+
+  toggleShowBanner: () =>
     set((state) => ({
-      uiState: {
-        ...state.uiState,
-        isFormInPreviewMode: !state.uiState.isFormInPreview,
-      },
+      uiState: { ...state.uiState, showBanner: !state.uiState.showBanner },
     })),
-  publishForm: () =>
-    set((state) => ({
-      uiState: { ...state.uiState, isFormPublished: true },
-      form: { ...state.form, updatedAt: new Date() },
-    })),
+
+  reorderQuestions: (sourceIndex, destinationIndex) =>
+    set((state) => {
+      const updatedQuestions = Array.from(state.form.questions);
+      const [removed] = updatedQuestions.splice(sourceIndex, 1);
+      updatedQuestions.splice(destinationIndex, 0, removed);
+
+      return {
+        form: {
+          ...state.form,
+          questions: updatedQuestions,
+          updatedAt: new Date(),
+        },
+      };
+    }),
 }));

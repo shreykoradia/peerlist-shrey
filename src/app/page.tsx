@@ -1,5 +1,10 @@
-import FormBuilder from "@/modules/form-builder/components";
+import FormPage from "@/modules/form-page";
+import Container from "@/shared/ui/container";
 
 export default function Home() {
-  return <FormBuilder />;
+  return (
+    <Container>
+      <FormPage />
+    </Container>
+  );
 }

@@ -30,7 +30,10 @@ function AddQuestionMenu({ handleOptionChange }: AddQuestionMenuProp) {
           <PlusIcon className="my-1" />
           Add Question
         </SelectTrigger>
-        <SelectContent className="w-[300px]">
+        <SelectContent
+          className="w-[300px]"
+          onClick={(e) => e.stopPropagation()}
+        >
           <SelectGroup>
             <SelectLabel>INPUT TYPES</SelectLabel>
             {menuOption.map(({ label, value, icon: Icon }) => (

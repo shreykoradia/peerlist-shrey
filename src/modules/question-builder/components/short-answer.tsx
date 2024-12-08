@@ -1,8 +1,16 @@
 import { Textarea } from "@/shared/ui/textarea";
 
-const ShortAnswer: React.FC = () => {
+type ShortAnswerProp = {
+  handleAnswerChange: (answer: string) => void;
+};
+
+const ShortAnswer: React.FC<ShortAnswerProp> = ({ handleAnswerChange }) => {
   return (
-    <Textarea maxLength={150} disabled className="resize-none max-h-[2rem]" />
+    <Textarea
+      maxLength={150}
+      className="resize-none max-h-8"
+      onChange={(e) => handleAnswerChange(e.target.value)}
+    />
   );
 };
 
