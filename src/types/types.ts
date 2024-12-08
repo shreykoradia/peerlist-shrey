@@ -19,6 +19,7 @@ type QuestionProp = {
   type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
   selectedOption: MenuOptionProp;
   radioOptions: RadioGroupOptionProp[];
+  error?: string;
   answer?: string;
 };
 
@@ -33,7 +34,9 @@ export type FormProp = {
   uiState: {
     isFormPublished: boolean;
     isFormInPreview: boolean;
+    showBanner: boolean;
   };
+  validateQuestions: () => boolean;
   updateFormTitle: (formId: string, title: string) => void;
   addQuestion: (
     type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE]
@@ -46,4 +49,5 @@ export type FormProp = {
   ) => void;
   togglePreviewMode: () => void;
   publishForm: () => void;
+  toggleShowBanner: () => void;
 };

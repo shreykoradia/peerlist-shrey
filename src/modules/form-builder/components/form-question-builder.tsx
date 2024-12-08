@@ -11,13 +11,14 @@ import {
 
 import { useFormStore } from "@/shared/store/form";
 import { Input } from "@/shared/ui/input";
-import { menuOption } from "@/shared/lib/constant";
+import { menuOption, QUESTION_TYPE } from "@/shared/lib/constant";
 
 import ReorderIcon from "@/assets/icons/reorder.svg";
 
 import { MenuOptionProp } from "@/types/types";
 
 import AddQuestionMenu from "./menu";
+import clsx from "clsx";
 
 function FormQuestionBuilder() {
   const form = useFormStore((state) => state.form);
@@ -37,7 +38,9 @@ function FormQuestionBuilder() {
             <React.Fragment key={quest.id}>
               <QuestionEditor
                 key={quest.id}
-                className="flex flex-col gap-2 w-full"
+                className={clsx("flex flex-col gap-2 w-full", {
+                  "border-destructive": quest.error,
+                })}
               >
                 <QuestionEditorHeader>
                   <div className="flex items-center gap-2 w-full">
@@ -45,11 +48,15 @@ function FormQuestionBuilder() {
                       <Input
                         type="text"
                         name="questionText"
-                        className="text-sm font-semibold mb-1 !p-0 !pl-1"
+                        className={clsx(
+                          "text-sm font-semibold mb-1 !p-0 !pl-1",
+                          { "placeholder:text-destructive": quest.error }
+                        )}
                         value={quest.questionText}
                         placeholder="Write a question..."
                         onChange={(e) =>
                           updateQuestion(quest.id, {
+                            error: "",
                             questionText: e.target.value,
                           })
                         }
@@ -76,6 +83,7 @@ function FormQuestionBuilder() {
                             menuOption.find((opt) => opt.value === option) ||
                             ({} as MenuOptionProp);
                           updateQuestion(quest.id, {
+                            error: "",
                             type: selectedOption.value,
                             selectedOption: selectedOption,
                           });
@@ -88,14 +96,19 @@ function FormQuestionBuilder() {
                 <QuestionEditorBody
                   type={quest.type}
                   options={
-                    quest.type === "singleSelect"
+                    quest.type === QUESTION_TYPE.SINGLE_SELECT
                       ? quest.radioOptions
                       : undefined
                   }
                   onOptionsChange={
-                    quest.type === "singleSelect"
+                    quest.type === QUESTION_TYPE.SINGLE_SELECT
                       ? (options) => updateRadioOption(quest.id, options)
                       : undefined
+                  }
+                  isError={
+                    quest.type === QUESTION_TYPE.SINGLE_SELECT && quest?.error
+                      ? true
+                      : false
                   }
                 />
               </QuestionEditor>

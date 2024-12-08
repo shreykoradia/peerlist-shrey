@@ -40,6 +40,7 @@ const QuestionEditorBody = React.forwardRef<
     onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
     onAnswerChange?: (answer: string) => void;
     isOnlyView?: boolean;
+    isError?: boolean;
   }
 >(
   (
@@ -50,6 +51,7 @@ const QuestionEditorBody = React.forwardRef<
       onAnswerChange,
       onOptionsChange,
       isOnlyView = false,
+      isError = false,
       ...props
     },
     ref
@@ -96,6 +98,7 @@ const QuestionEditorBody = React.forwardRef<
             onOptionsChange={onOptionsChange}
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             isOnlyView={isOnlyView}
+            isError={isError}
           />
         )}
       </div>

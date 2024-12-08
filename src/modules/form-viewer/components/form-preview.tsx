@@ -20,9 +20,9 @@ function FormPreview() {
       <FormHeader isPreviewMode={uiState.isFormInPreview} />
       <div className="h-[calc(100vh_-_7.5rem)] overflow-y-auto">
         <div className="p-6 h-full">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
             {form.questions.map((quest) => (
-              <React.Fragment key={quest.id}>
+              <div className="flex flex-col gap-1" key={quest.id}>
                 <div className="flex flex-col gap-1">
                   <Label
                     variant={"subHeader"}
@@ -47,7 +47,7 @@ function FormPreview() {
                     uiState.isFormPublished || uiState.isFormInPreview
                   }
                 />
-              </React.Fragment>
+              </div>
             ))}
           </div>
         </div>

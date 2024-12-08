@@ -70,6 +70,10 @@ export default {
           stroke: "var(--secondary-grey)",
         },
 
+        ".svg_secondary_fill_black > path": {
+          fill: "var(--primary-dark)",
+        },
+
         ".svg_secondary_stroke > g": {
           stroke: "var(--secondary-grey)",
         },
