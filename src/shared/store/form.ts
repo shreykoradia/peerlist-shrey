@@ -24,6 +24,11 @@ export const useFormStore = create<FormProp>((set, get) => ({
         const invalidOptions = question.radioOptions.filter(
           (option) => option.value.trim() === ""
         );
+
+        if (question.radioOptions.length === 0) {
+          error = "Empty options are not allowed";
+        }
+
         if (invalidOptions.length > 0) {
           error = "All options must have valid values.";
         }
@@ -106,7 +111,9 @@ export const useFormStore = create<FormProp>((set, get) => ({
       form: {
         ...state.form,
         questions: state.form.questions.map((quest) =>
-          quest.id === questionId ? { ...quest, radioOptions: options } : quest
+          quest.id === questionId
+            ? { ...quest, radioOptions: options, error: "" }
+            : quest
         ),
         updatedAt: new Date(),
       },

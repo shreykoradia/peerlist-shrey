@@ -58,7 +58,7 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
   return (
     <div className="w-full space-y-2">
       <RadioGroup onValueChange={(value) => handleAnswerChange(value)}>
-        {options.length === 0 ? (
+        {!isOnlyView && options.length === 0 ? (
           <Button
             variant={"default"}
             className="gap-1"
