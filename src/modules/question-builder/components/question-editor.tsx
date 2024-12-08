@@ -16,7 +16,7 @@ const QuestionEditor = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-2xl bg-background border border-secondary-foreground shadow-sm p-4",
+      "rounded-2xl bg-background border border-secondary-foreground shadow-sm p-4 hover:bg-secondary-light",
       className
     )}
     {...props}

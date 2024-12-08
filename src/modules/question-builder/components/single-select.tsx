@@ -55,7 +55,7 @@ const SingleSelect: React.FC<{
               readOnly={!option.isEditable}
               onChange={(e) => handleUpdateOption(option.id, e.target.value)}
               placeholder="Enter option..."
-              className="w-full p-1"
+              className="w-full p-1 text-sm font-normal"
             />
             {options.length - 1 === index ? (
               <Button variant={"icon"} size={"icon"} onClick={handleAddOption}>

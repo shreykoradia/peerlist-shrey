@@ -18,7 +18,7 @@ function FormHeader() {
         <Input
           value={form.formTitle}
           onChange={(e) => updateFormTitle(form.id, e.target.value)}
-          className="font-semibold text-base w-2/3"
+          className="font-semibold text-base w-2/3 focus:!outline-none focus:!shadow-none"
         />
         <Button variant={"outline"} className="gap-1">
           Preview
