@@ -44,7 +44,9 @@ function FormPreview() {
       )}
       <div
         ref={containerRef}
-        className="h-[calc(100vh_-_7.5rem)] overflow-y-auto"
+        className={clsx("h-[calc(100vh_-_7.5rem)] overflow-y-auto", {
+          "h-[calc(100vh_-_3.75rem)]": uiState.isFormPublished && !isScrollable,
+        })}
       >
         <div className="p-6 h-full">
           <div className="flex flex-col gap-8 pb-1">
@@ -93,9 +95,8 @@ function FormPreview() {
         <div className="flex justify-end m-4">
           <Button variant={"default"}>Submit</Button>
         </div>
-      ) : (
-        <FormFooter />
-      )}
+      ) : null}
+      {!uiState.isFormPublished ? <FormFooter /> : null}
     </>
   );
 }
