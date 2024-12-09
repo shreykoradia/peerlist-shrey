@@ -1,6 +1,5 @@
 import FormPreview from "@/modules/form-viewer";
 import { getFormById } from "@/modules/form-viewer/api";
-import { FormResponseObject } from "@/modules/form-viewer/type";
 import Container from "@/shared/ui/container";
 import { QuestionProp } from "@/types/types";
 

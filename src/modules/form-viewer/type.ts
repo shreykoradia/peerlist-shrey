@@ -1,4 +1,4 @@
-import { QuestionProp, QuestionsEntity } from "@/types/types";
+import { QuestionProp } from "@/types/types";
 
 type Form = {
   id: string;
