@@ -27,7 +27,7 @@ function PublishedFormHeader() {
             variant={"subHeader"}
             weight={"normal"}
             className="whitespace-nowrap"
-            text={`Form completeness - ${completionPercentage}`}
+            text={`Form completeness - ${completionPercentage}%`}
           />
           <Progress
             value={completionPercentage}
