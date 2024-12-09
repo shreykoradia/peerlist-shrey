@@ -16,7 +16,6 @@ export default async function handler(
         const form = req.body;
 
         if (!form || !form.id) {
-          console.log({ form });
           return res.status(400).json({ message: "Invalid form data" });
         }
 

@@ -37,7 +37,7 @@ const QuestionSchema = new Schema({
     {
       id: { type: String, required: true },
       value: { type: String, required: true },
-      isEditable: { type: Boolean, default: true },
+      isEditable: { type: Boolean, default: false },
     },
   ],
   answer: { type: String },

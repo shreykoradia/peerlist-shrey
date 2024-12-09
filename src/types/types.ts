@@ -1,3 +1,4 @@
+import { FormResponseObject } from "@/modules/form-viewer/type";
 import { QUESTION_TYPE } from "@/shared/lib/constant";
 
 export type MenuOptionProp = {
@@ -28,14 +29,15 @@ export type FormProp = {
     id: string;
     formTitle: string;
     questions: QuestionProp[];
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string | Date;
+    updatedAt: string | Date;
   };
   uiState: {
     isFormPublished: boolean;
     isFormInPreview: boolean;
     showBanner: boolean;
   };
+  hydrateForm: (formData: FormResponseObject) => void;
   validateQuestions: () => boolean;
   updateFormTitle: (formId: string, title: string) => void;
   addQuestion: (
@@ -51,4 +53,61 @@ export type FormProp = {
   publishForm: () => void;
   toggleShowBanner: () => void;
   reorderQuestions: (sourceIndex: number, destinationIndex: number) => void;
+};
+
+// API Payload and Response Prop
+
+export type PublishFormPayload = {
+  id: string;
+  formTitle: string;
+  isPublished: boolean;
+  questions: Array<{
+    id: string;
+    questionText: string;
+    questionDesc: string;
+    type: string;
+    selectedOption: {
+      value: string;
+      label: string;
+    };
+    radioOptions: Array<{
+      id: string;
+      value: string;
+      isEditable?: boolean;
+    }>;
+    error?: string;
+  }>;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+};
+
+export interface PublishFormProps {
+  success: boolean;
+  data: Data;
+}
+export interface Data {
+  id: string;
+  formTitle: string;
+  questions?: QuestionsEntity[];
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+}
+export interface QuestionsEntity {
+  id: string;
+  questionText: string;
+  questionDesc: string;
+  type: string;
+  selectedOption: SelectedOption;
+  radioOptions?: RadioGroupOptionProp[] | null;
+}
+export interface SelectedOption {
+  value: string;
+  label: string;
+}
+
+export type ErrorResponse = {
+  message: string;
 };

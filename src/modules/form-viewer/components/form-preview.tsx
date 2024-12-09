@@ -13,14 +13,26 @@ import { useFormStore } from "@/shared/store/form";
 import Label from "@/shared/ui/label";
 import PublishedFormHeader from "@/modules/form-builder/components/form-publish-header";
 import { Button } from "@/shared/ui/button";
+import { FormResponseObject } from "../type";
 
-function FormPreview() {
+type FormPreviewProp = {
+  formData: FormResponseObject;
+};
+
+function FormPreview({ formData }: FormPreviewProp) {
   const uiState = useFormStore((state) => state.uiState);
   const form = useFormStore((state) => state.form);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
+  const hydrateForm = useFormStore((state) => state.hydrateForm);
 
   const [isScrollable, setIsScrollable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  console.log({ uiState, form });
+
+  useEffect(() => {
+    hydrateForm(formData);
+  }, [formData]);
 
   useEffect(() => {
     const container = containerRef.current;
