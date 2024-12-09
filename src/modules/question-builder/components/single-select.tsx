@@ -32,7 +32,7 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
   // Function to add a new option
   const handleAddOption = () => {
     const newOption: RadioGroupOptionProp = {
-      id: `option-${options.length + 1}`,
+      id: crypto.randomUUID(),
       value: "",
       isEditable: true,
     };
