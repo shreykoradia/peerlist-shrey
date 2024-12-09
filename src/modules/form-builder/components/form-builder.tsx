@@ -5,6 +5,7 @@ import FormHeader from "./form-header";
 import FormFooter from "./form-footer";
 import FormQuestionBuilder from "./form-question-builder";
 import { useFormStore } from "@/shared/store/form";
+import clsx from "clsx";
 
 function FormBuilder() {
   const form = useFormStore((state) => state.form);
@@ -32,7 +33,9 @@ function FormBuilder() {
       <FormHeader isPreviewMode={false} />
       <div
         ref={containerRef}
-        className="h-[calc(100vh_-_7.5rem)] overflow-y-auto"
+        className={clsx("h-[calc(100vh_-_7.5rem)] overflow-y-auto", {
+          "maxMd:h-[calc(100vh_-_10.084rem)]": isScrollable,
+        })}
       >
         <FormQuestionBuilder isScrollable={isScrollable} />
       </div>

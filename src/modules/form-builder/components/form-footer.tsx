@@ -30,7 +30,7 @@ function FormFooter({ isScrollable }: FormFooterProp) {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center border-t border-t-secondary-foreground px-6 py-4 bg-secondary">
+      <div className="w-full flex-wrap flex justify-between items-center border-t border-t-secondary-foreground px-6 py-4 bg-secondary">
         <Button disabled variant={"outline"} className="gap-1">
           <DraftIcon className="mt-0.5" />
           Save as draft
@@ -40,7 +40,7 @@ function FormFooter({ isScrollable }: FormFooterProp) {
         ) : null}
         <Button
           variant={"default"}
-          className="gap-1"
+          className="gap-1 flex-1 mt-2"
           onClick={() => {
             if (form.questions.length === 0) {
               toggleShowBanner();
