@@ -8,6 +8,7 @@ import { submitFormResponses } from "@/modules/form-viewer/api";
 
 function PlubishFormFooter() {
   const form = useFormStore((state) => state.form);
+  const toggleSubmit = useFormStore((state) => state.toggleSubmitMode);
 
   const handleSubmit = async () => {
     const payload = {
@@ -21,7 +22,14 @@ function PlubishFormFooter() {
       ),
     };
 
-    await submitFormResponses(payload.formId, payload.responses);
+    const response = await submitFormResponses(
+      payload.formId,
+      payload.responses
+    );
+
+    if (response.success === true) {
+      toggleSubmit();
+    }
   };
 
   return (

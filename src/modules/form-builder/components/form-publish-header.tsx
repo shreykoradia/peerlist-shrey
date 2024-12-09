@@ -4,8 +4,15 @@ import React from "react";
 
 import Label from "@/shared/ui/label";
 import { Progress } from "@/shared/ui/progress";
+import { useFormStore } from "@/shared/store/form";
 
 function PublishedFormHeader() {
+  const getFormCompletion = useFormStore((state) => state.getFormCompletion);
+
+  const completionPercentage = getFormCompletion();
+
+  console.log({ completionPercentage });
+
   return (
     <>
       <div className="px-6 py-4 w-full border-b border-b-secondary-foreground flex items-center justify-between">
@@ -23,7 +30,7 @@ function PublishedFormHeader() {
             text="Form completeness - 50%"
           />
           <Progress
-            value={50}
+            value={completionPercentage}
             className="w-full border border-secondary-foreground"
           />
         </div>

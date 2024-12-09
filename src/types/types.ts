@@ -66,6 +66,7 @@ export type FormProp = {
   reorderQuestions: (sourceIndex: number, destinationIndex: number) => void;
   resetForm: () => void;
   toggleSubmitMode: () => void;
+  getFormCompletion: () => number;
 };
 
 // API Payload and Response Prop

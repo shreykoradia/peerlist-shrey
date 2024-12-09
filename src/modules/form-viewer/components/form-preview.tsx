@@ -82,8 +82,9 @@ function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
       )}
       <div
         ref={containerRef}
-        className={clsx("h-[calc(100vh_-_7.5rem)] overflow-y-auto", {
-          "h-[calc(100vh_-_3.75rem)]": uiState.isFormPublished && !isScrollable,
+        className={clsx("overflow-y-auto", {
+          "h-[calc(100vh_-_3.75rem)]": isFormPublished && !isScrollable,
+          "h-[calc(100vh_-_7.5rem)]": !isFormPublished,
         })}
       >
         <div className="p-6 h-full">

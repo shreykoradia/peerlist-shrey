@@ -99,6 +99,7 @@ export const useFormStore = create<FormProp>((set, get) => ({
               type: type,
               selectedOption: selectedOption,
               radioOptions: [],
+              answer: "",
             },
           ],
         },
@@ -149,14 +150,26 @@ export const useFormStore = create<FormProp>((set, get) => ({
   },
 
   publishForm: () => {
-    const isValid = get().validateQuestions();
+    const isValid = get().validateQuestions(); // Reuse the validation function
+    if (!isValid) {
+      set((state) => ({
+        uiState: {
+          ...state.uiState,
+          showBanner: {
+            message: "Please fix errors in the form before publishing.",
+            show: true,
+            variant: "error",
+          },
+        },
+      }));
+    }
     if (isValid) {
       set((state) => {
         const updatedQuestions = state.form.questions.map((question) => {
           if (question.type === QUESTION_TYPE.SINGLE_SELECT) {
             const updatedOptions = question.radioOptions.map((option) => ({
               ...option,
-              isEditable: false,
+              isEditable: false, // Ensure options are locked on publish
             }));
             return { ...question, radioOptions: updatedOptions };
           }
@@ -171,10 +184,21 @@ export const useFormStore = create<FormProp>((set, get) => ({
           },
           uiState: {
             ...state.uiState,
-            isFormPublished: true,
+            isFormPublished: true, // Mark form as published
           },
         };
       });
+    } else {
+      set((state) => ({
+        uiState: {
+          ...state.uiState,
+          showBanner: {
+            message: "Please fix errors in the form before publishing.",
+            show: true,
+            variant: "error",
+          },
+        },
+      }));
     }
   },
 
@@ -233,4 +257,24 @@ export const useFormStore = create<FormProp>((set, get) => ({
         isSubmitted: true,
       },
     })),
+
+  getFormCompletion: () => {
+    const { questions } = get().form;
+
+    if (!questions || questions.length === 0) return 0;
+
+    const answeredQuestions = questions.filter((q) => {
+      if (q.type === QUESTION_TYPE.SINGLE_SELECT) {
+        return q.answer && q.radioOptions.some((opt) => opt.id === q.answer);
+      }
+      return q.answer?.trim() !== "";
+    });
+
+    console.log({ answeredQuestions });
+
+    const completionPercentage =
+      (answeredQuestions.length / questions.length) * 100;
+
+    return Math.round(completionPercentage);
+  },
 }));
