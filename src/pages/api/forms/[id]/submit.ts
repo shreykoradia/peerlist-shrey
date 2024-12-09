@@ -35,7 +35,7 @@ export default async function handler(
           message: "This form has already been submitted",
         });
       }
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       form.questions = form.questions.map((question: any) => {
         if (responses[question.id] !== undefined) {
           return { ...question.toObject(), answer: responses[question.id] };
@@ -56,6 +56,7 @@ export default async function handler(
       console.error("Error submitting form:", error);
       res.status(500).json({
         success: false,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         message: (error as any).message || "Internal server error",
       });
     }

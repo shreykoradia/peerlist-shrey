@@ -3,7 +3,6 @@ import { cn } from "@/shared/lib/tailwind-merge";
 import ShortAnswer from "./short-answer";
 import LongAnswer from "./long-answer";
 import URLInput from "./url-input";
-import DateInput from "./date-input";
 import SingleSelect from "./single-select";
 import { QUESTION_TYPE } from "@/shared/lib/constant";
 import { RadioGroupOptionProp } from "@/types/types";

@@ -60,11 +60,12 @@ function FormFooter({ isScrollable }: FormFooterProp) {
           variant: "error",
         });
       }
-    } catch (error) {
+    } catch (err) {
       toggleShowBanner({
         message: "An unexpected error occurred!",
         variant: "error",
       });
+      console.log({ err });
     }
   };
 
