@@ -120,6 +120,7 @@ function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
                   isOnlyView={isFormPublished}
                   isInPreview={uiState.isFormInPreview}
                   answer={quest.answer}
+                  isSubmitted={uiState.isSubmitted}
                 />
               </div>
             ))}

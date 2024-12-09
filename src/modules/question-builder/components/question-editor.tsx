@@ -42,6 +42,7 @@ const QuestionEditorBody = React.forwardRef<
     isOnlyView?: boolean;
     isError?: boolean;
     isInPreview?: boolean;
+    isSubmitted?: boolean;
   }
 >(
   (
@@ -55,6 +56,7 @@ const QuestionEditorBody = React.forwardRef<
       isError = false,
       answer,
       isInPreview,
+      isSubmitted,
       ...props
     },
     ref
@@ -75,7 +77,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             answer={answer}
             isOnlyView={isOnlyView}
-            isInPreview={isInPreview}
+            isInPreview={isInPreview || isSubmitted}
           />
         )}
         {type === QUESTION_TYPE.LONG_ANSWER && (
@@ -83,7 +85,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             answer={answer}
             isOnlyView={isOnlyView}
-            isInPreview={isInPreview}
+            isInPreview={isInPreview || isSubmitted}
           />
         )}
         {type === QUESTION_TYPE.URL && (
@@ -91,7 +93,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             answer={answer}
             isOnlyView={isOnlyView}
-            isInPreview={isInPreview}
+            isInPreview={isInPreview || isSubmitted}
           />
         )}
         {type === QUESTION_TYPE.NUMBER && (
@@ -99,7 +101,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             answer={answer}
             isOnlyView={isOnlyView}
-            isInPreview={isInPreview}
+            isInPreview={isInPreview || isSubmitted}
           />
         )}
         {/* {type === QUESTION_TYPE.DATE && (
@@ -114,7 +116,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             isOnlyView={isOnlyView}
             isError={isError}
-            isInPreview={isInPreview}
+            isInPreview={isInPreview || isSubmitted}
           />
         )}
       </div>
