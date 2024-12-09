@@ -13,7 +13,6 @@ export default function FormPage() {
     <>
       {uiState.isFormInPreview ? (
         <FormPreview
-          isFormPreview={uiState.isFormInPreview}
           isFormPublished={false}
           formData={{} as FormResponseObject}
         />

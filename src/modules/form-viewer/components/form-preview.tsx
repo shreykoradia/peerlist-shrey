@@ -16,16 +16,11 @@ import { Button } from "@/shared/ui/button";
 import { FormResponseObject } from "../type";
 
 type FormPreviewProp = {
-  isFormPreview: boolean;
   isFormPublished: boolean;
   formData: FormResponseObject;
 };
 
-function FormPreview({
-  isFormPreview,
-  isFormPublished,
-  formData,
-}: FormPreviewProp) {
+function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
   const uiState = useFormStore((state) => state.uiState);
   const form = useFormStore((state) => state.form);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
