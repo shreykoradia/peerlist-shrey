@@ -9,6 +9,7 @@ import DraftIcon from "@/assets/icons/draft.svg";
 import CheckIcon from "@/assets/icons/check.svg";
 import { useFormStore } from "@/shared/store/form";
 import AddQuestionMenu from "./menu";
+import clsx from "clsx";
 
 type FormFooterProp = {
   isScrollable?: boolean;
@@ -40,7 +41,7 @@ function FormFooter({ isScrollable }: FormFooterProp) {
         ) : null}
         <Button
           variant={"default"}
-          className="gap-1 flex-1 mt-2"
+          className={clsx("gap-1", { " flex-1 mt-2": isScrollable })}
           onClick={() => {
             if (form.questions.length === 0) {
               toggleShowBanner();
