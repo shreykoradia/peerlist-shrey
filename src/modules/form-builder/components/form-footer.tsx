@@ -10,6 +10,8 @@ import CheckIcon from "@/assets/icons/check.svg";
 import { useFormStore } from "@/shared/store/form";
 import AddQuestionMenu from "./menu";
 import clsx from "clsx";
+import { postPublishForm } from "../api";
+import { PublishFormPayload } from "@/types/types";
 
 type FormFooterProp = {
   isScrollable?: boolean;
@@ -24,9 +26,24 @@ function FormFooter({ isScrollable }: FormFooterProp) {
   const publishForm = useFormStore((state) => state.publishForm);
   const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
 
-  const handlePublishedForm = () => {
+  const handlePublishedForm = async () => {
     publishForm();
-    navigate.replace(`form/${form.id}`);
+    const formPayload: PublishFormPayload = {
+      id: form.id,
+      questions: form.questions,
+      isPublished: true,
+      formTitle: form.formTitle,
+      createdAt: form.createdAt,
+      updatedAt: form.updatedAt,
+    };
+
+    const response = await postPublishForm(formPayload);
+
+    if (response.success === true) {
+      navigate.replace(`form/${response.data.id}`);
+    } else {
+      console.error("Failed to publish form:", response);
+    }
   };
 
   return (
@@ -41,7 +58,9 @@ function FormFooter({ isScrollable }: FormFooterProp) {
         ) : null}
         <Button
           variant={"default"}
-          className={clsx("gap-1", { " flex-1 mt-2": isScrollable })}
+          className={clsx("gap-1", {
+            " maxMd:flex-1 maxMd:mt-2": isScrollable,
+          })}
           onClick={() => {
             if (form.questions.length === 0) {
               toggleShowBanner();

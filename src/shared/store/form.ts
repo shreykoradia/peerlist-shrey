@@ -1,6 +1,7 @@
 import { FormProp, MenuOptionProp, RadioGroupOptionProp } from "@/types/types";
 import { create } from "zustand";
 import { menuOption, QUESTION_TYPE } from "../lib/constant";
+import { FormResponseObject } from "@/modules/form-viewer/type";
 
 export const useFormStore = create<FormProp>((set, get) => ({
   form: {
@@ -15,6 +16,18 @@ export const useFormStore = create<FormProp>((set, get) => ({
     isFormPublished: false,
     showBanner: false,
   },
+  hydrateForm: (formData: FormResponseObject) =>
+    set((state) => ({
+      form: {
+        ...state.form,
+        ...formData.form,
+        questions: formData.form.questions || [],
+      },
+      uiState: {
+        ...state.uiState,
+        ...formData.uiState,
+      },
+    })),
   validateQuestions: () => {
     const state = get();
     const updatedQuestions = state.form.questions.map((question) => {
@@ -133,12 +146,30 @@ export const useFormStore = create<FormProp>((set, get) => ({
   publishForm: () => {
     const isValid = get().validateQuestions();
     if (isValid) {
-      set((state) => ({
-        uiState: {
-          ...state.uiState,
-          isFormPublished: !state.uiState.isFormPublished,
-        },
-      }));
+      set((state) => {
+        const updatedQuestions = state.form.questions.map((question) => {
+          if (question.type === QUESTION_TYPE.SINGLE_SELECT) {
+            const updatedOptions = question.radioOptions.map((option) => ({
+              ...option,
+              isEditable: false,
+            }));
+            return { ...question, radioOptions: updatedOptions };
+          }
+          return question;
+        });
+
+        return {
+          form: {
+            ...state.form,
+            questions: updatedQuestions,
+            updatedAt: new Date(),
+          },
+          uiState: {
+            ...state.uiState,
+            isFormPublished: true,
+          },
+        };
+      });
     }
   },
 
