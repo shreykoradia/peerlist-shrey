@@ -25,8 +25,8 @@ const QuestionSchema = new Schema({
       QUESTION_TYPE.SHORT_ANSWER,
       QUESTION_TYPE.LONG_ANSWER,
       QUESTION_TYPE.URL,
-      QUESTION_TYPE.DATE,
       QUESTION_TYPE.SINGLE_SELECT,
+      QUESTION_TYPE.NUMBER,
     ],
   },
   selectedOption: {
