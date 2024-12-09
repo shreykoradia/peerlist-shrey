@@ -16,10 +16,16 @@ import { Button } from "@/shared/ui/button";
 import { FormResponseObject } from "../type";
 
 type FormPreviewProp = {
+  isFormPreview: boolean;
+  isFormPublished: boolean;
   formData: FormResponseObject;
 };
 
-function FormPreview({ formData }: FormPreviewProp) {
+function FormPreview({
+  isFormPreview,
+  isFormPublished,
+  formData,
+}: FormPreviewProp) {
   const uiState = useFormStore((state) => state.uiState);
   const form = useFormStore((state) => state.form);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
@@ -28,9 +34,10 @@ function FormPreview({ formData }: FormPreviewProp) {
   const [isScrollable, setIsScrollable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  console.log({ uiState, form });
-
   useEffect(() => {
+    if (!isFormPublished) {
+      return;
+    }
     hydrateForm(formData);
   }, [formData]);
 
@@ -48,7 +55,7 @@ function FormPreview({ formData }: FormPreviewProp) {
   };
   return (
     <>
-      {uiState.isFormPublished ? (
+      {isFormPublished ? (
         <PublishedFormHeader />
       ) : (
         <FormHeader isPreviewMode={uiState.isFormInPreview} />

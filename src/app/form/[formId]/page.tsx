@@ -29,7 +29,11 @@ export default async function FormViewPage({
 
   return (
     <Container>
-      <FormPreview formData={formData} />
+      <FormPreview
+        isFormPreview={false}
+        isFormPublished={response.data.isPublished}
+        formData={formData}
+      />
     </Container>
   );
 }
