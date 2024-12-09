@@ -26,3 +26,28 @@ export async function getFormById(formId: string): Promise<PublishFormProps> {
     throw error;
   }
 }
+
+export async function submitFormResponses(
+  formId: string,
+  responses: Record<string, string>
+): Promise<{ success: boolean; message: string }> {
+  try {
+    const response = await fetch(`/api/forms/${formId}/submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ formId, responses }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to submit the form");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    throw error;
+  }
+}

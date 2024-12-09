@@ -23,7 +23,12 @@ export default async function FormViewPage({
     uiState: {
       isFormPublished: response.data.isPublished,
       isFormInPreview: false,
-      showBanner: false,
+      isSubmitted: response.data.isSubmitted,
+      showBanner: {
+        message: "",
+        show: false,
+        variant: "success",
+      },
     },
   };
 

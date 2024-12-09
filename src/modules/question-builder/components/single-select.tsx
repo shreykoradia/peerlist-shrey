@@ -16,6 +16,8 @@ type SingleSelectProp = {
   handleAnswerChange: (answer: string) => void;
   isOnlyView: boolean;
   isError: boolean;
+  answer?: string;
+  isInPreview?: boolean;
 };
 
 const SingleSelect: React.FC<SingleSelectProp> = ({
@@ -24,6 +26,8 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
   isOnlyView,
   handleAnswerChange,
   isError,
+  answer,
+  isInPreview,
 }) => {
   // Function to add a new option
   const handleAddOption = () => {
@@ -57,8 +61,11 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
 
   return (
     <div className="w-full space-y-2">
-      <RadioGroup onValueChange={(value) => handleAnswerChange(value)}>
-        {!isOnlyView && options.length === 0 ? (
+      <RadioGroup
+        value={options.find((opt) => opt.value === answer)?.value}
+        onValueChange={(value) => handleAnswerChange(value)}
+      >
+        {!isInPreview && options.length === 0 ? (
           <Button
             variant={"default"}
             className="gap-1"
@@ -69,8 +76,12 @@ const SingleSelect: React.FC<SingleSelectProp> = ({
         ) : null}
         {options.map((option, index) => (
           <div key={option.id} className="flex items-center space-x-2">
-            <RadioGroupItem value={option.id} id={option.id} />
-            {isOnlyView ? (
+            <RadioGroupItem
+              value={option.id}
+              id={option.id}
+              disabled={!isInPreview && !isOnlyView}
+            />
+            {isOnlyView || isInPreview ? (
               <Label
                 variant={"subHeader"}
                 weight={"medium"}

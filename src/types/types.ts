@@ -35,7 +35,12 @@ export type FormProp = {
   uiState: {
     isFormPublished: boolean;
     isFormInPreview: boolean;
-    showBanner: boolean;
+    isSubmitted: boolean;
+    showBanner: {
+      message: string;
+      show: boolean;
+      variant: string;
+    };
   };
   hydrateForm: (formData: FormResponseObject) => void;
   validateQuestions: () => boolean;
@@ -51,8 +56,17 @@ export type FormProp = {
   ) => void;
   togglePreviewMode: () => void;
   publishForm: () => void;
-  toggleShowBanner: () => void;
+  toggleShowBanner: ({
+    message,
+    variant,
+  }: {
+    message: string;
+    variant: string;
+  }) => void;
   reorderQuestions: (sourceIndex: number, destinationIndex: number) => void;
+  resetForm: () => void;
+  toggleSubmitMode: () => void;
+  getFormCompletion: () => number;
 };
 
 // API Payload and Response Prop
@@ -90,6 +104,7 @@ export interface Data {
   formTitle: string;
   questions?: QuestionsEntity[];
   isPublished: boolean;
+  isSubmitted: boolean;
   createdAt: string;
   updatedAt: string;
   _id: string;

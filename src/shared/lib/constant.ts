@@ -1,7 +1,7 @@
 import ShortAnswerIcon from "@/assets/icons/short_answer.svg";
 import LongAnswerIcon from "@/assets/icons/long_answer.svg";
 import UrlIcon from "@/assets/icons/url.svg";
-import DateIcon from "@/assets/icons/date.svg";
+// import DateIcon from "@/assets/icons/date.svg";
 import SingleSelectIcon from "@/assets/icons/single_select.svg";
 import NumberIcon from "@/assets/icons/hash.svg";
 import { MenuOptionProp } from "@/types/types";
@@ -42,11 +42,11 @@ export const menuOption: MenuOptionProp[] = [
     icon: UrlIcon,
   },
 
-  {
-    value: QUESTION_TYPE.DATE,
-    label: "Date",
-    icon: DateIcon,
-  },
+  // {
+  //   value: QUESTION_TYPE.DATE,
+  //   label: "Date",
+  //   icon: DateIcon,
+  // },
 ];
 
 export const PREVIEW = "preview";

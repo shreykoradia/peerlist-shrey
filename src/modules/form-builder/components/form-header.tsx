@@ -23,7 +23,10 @@ function FormHeader({ isPreviewMode = false }: FormHeaderProp) {
 
   const handlePreviewClick = () => {
     if (form.questions.length === 0) {
-      toggleShowBanner();
+      toggleShowBanner({
+        message: "Please add questions to preview the form!",
+        variant: "error",
+      });
       return;
     }
     togglePreviewMode();
@@ -56,12 +59,12 @@ function FormHeader({ isPreviewMode = false }: FormHeaderProp) {
           <OpenIcon className="mt-0.5" />
         </Button>
       </div>
-      {showBanner ? (
+      {showBanner.show ? (
         <Banner
           variant={"error"}
           position={"top-right"}
-          bannerMessage="No questions added yet. Add questions to preview or publish your form."
-          onClose={() => toggleShowBanner()}
+          bannerMessage={showBanner.message}
+          onClose={() => toggleShowBanner({ message: "", variant: "" })}
         />
       ) : null}
     </>

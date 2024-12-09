@@ -11,7 +11,11 @@ type Form = {
 type UIState = {
   isFormPublished: boolean;
   isFormInPreview: boolean;
-  showBanner: boolean;
+  showBanner: {
+    message: string;
+    show: boolean;
+    variant: string;
+  };
 };
 
 export type FormResponseObject = {

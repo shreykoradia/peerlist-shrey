@@ -24,10 +24,21 @@ function FormFooter({ isScrollable }: FormFooterProp) {
   const addQuestion = useFormStore((state) => state.addQuestion);
   const uiState = useFormStore((state) => state.uiState);
   const publishForm = useFormStore((state) => state.publishForm);
+  const validateQuestions = useFormStore((state) => state.validateQuestions);
+
   const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
 
   const handlePublishedForm = async () => {
-    publishForm();
+    const isValid = validateQuestions();
+
+    if (!isValid) {
+      toggleShowBanner({
+        message: "Please fix the errors in your form!",
+        variant: "error",
+      });
+      return;
+    }
+
     const formPayload: PublishFormPayload = {
       id: form.id,
       questions: form.questions,
@@ -37,12 +48,24 @@ function FormFooter({ isScrollable }: FormFooterProp) {
       updatedAt: form.updatedAt,
     };
 
-    const response = await postPublishForm(formPayload);
+    try {
+      const response = await postPublishForm(formPayload);
 
-    if (response.success === true) {
-      navigate.replace(`form/${response.data.id}`);
-    } else {
-      console.error("Failed to publish form:", response);
+      if (response.success === true) {
+        publishForm();
+        navigate.replace(`form/${response.data.id}`);
+      } else {
+        toggleShowBanner({
+          message: "Something went wrong while publishing the form.",
+          variant: "error",
+        });
+      }
+    } catch (err) {
+      toggleShowBanner({
+        message: "An unexpected error occurred!",
+        variant: "error",
+      });
+      console.log({ err });
     }
   };
 
@@ -63,7 +86,10 @@ function FormFooter({ isScrollable }: FormFooterProp) {
           })}
           onClick={() => {
             if (form.questions.length === 0) {
-              toggleShowBanner();
+              toggleShowBanner({
+                message: "Please add questions to publish form!",
+                variant: "error",
+              });
               return;
             }
             handlePublishedForm();
