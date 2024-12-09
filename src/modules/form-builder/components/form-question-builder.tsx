@@ -16,6 +16,7 @@ import { Input } from "@/shared/ui/input";
 import { menuOption, QUESTION_TYPE } from "@/shared/lib/constant";
 
 import ReorderIcon from "@/assets/icons/reorder.svg";
+import DeleteIcon from "@/assets/icons/delete.svg";
 
 import { MenuOptionProp } from "@/types/types";
 
@@ -32,6 +33,7 @@ function FormQuestionBuilder({
   const addQuestion = useFormStore((state) => state.addQuestion);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
   const updateRadioOption = useFormStore((state) => state.updateRadioOption);
+  const removeQuestion = useFormStore((state) => state.removeQuestion);
 
   const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(null);
 
@@ -134,6 +136,9 @@ function FormQuestionBuilder({
                         />
                         <div className="cursor-grab">
                           <ReorderIcon className="svg_secondary_stroke_muted" />
+                        </div>
+                        <div onClick={() => removeQuestion(quest.id)}>
+                          <DeleteIcon />
                         </div>
                       </div>
                     </div>
