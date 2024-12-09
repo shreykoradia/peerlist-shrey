@@ -25,6 +25,7 @@ function FormFooter({ isScrollable }: FormFooterProp) {
   const uiState = useFormStore((state) => state.uiState);
   const publishForm = useFormStore((state) => state.publishForm);
   const toggleShowBanner = useFormStore((state) => state.toggleShowBanner);
+  const resetForm = useFormStore((state) => state.resetForm);
 
   const handlePublishedForm = async () => {
     publishForm();
@@ -41,7 +42,11 @@ function FormFooter({ isScrollable }: FormFooterProp) {
 
     if (response.success === true) {
       navigate.replace(`form/${response.data.id}`);
+      resetForm();
     } else {
+      toggleShowBanner({ message: "Something Went Wrong!", variant: "error" });
+      resetForm();
+      navigate.replace("/");
       console.error("Failed to publish form:", response);
     }
   };
@@ -63,7 +68,10 @@ function FormFooter({ isScrollable }: FormFooterProp) {
           })}
           onClick={() => {
             if (form.questions.length === 0) {
-              toggleShowBanner();
+              toggleShowBanner({
+                message: "Please add questions to publish form!",
+                variant: "error",
+              });
               return;
             }
             handlePublishedForm();

@@ -14,6 +14,7 @@ import Label from "@/shared/ui/label";
 import PublishedFormHeader from "@/modules/form-builder/components/form-publish-header";
 import { Button } from "@/shared/ui/button";
 import { FormResponseObject } from "../type";
+import { submitFormResponses } from "../api";
 
 type FormPreviewProp = {
   isFormPublished: boolean;
@@ -25,9 +26,38 @@ function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
   const form = useFormStore((state) => state.form);
   const updateQuestion = useFormStore((state) => state.updateQuestion);
   const hydrateForm = useFormStore((state) => state.hydrateForm);
+  const toggleSubmit = useFormStore((state) => state.toggleSubmitMode);
 
   const [isScrollable, setIsScrollable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleSubmit = async () => {
+    const payload = {
+      formId: form.id,
+      responses: form.questions.reduce(
+        (acc, question) => ({
+          ...acc,
+          [question.id]: question.answer,
+        }),
+        {}
+      ),
+    };
+
+    const response = await submitFormResponses(
+      payload.formId,
+      payload.responses
+    );
+
+    if (response.success === true) {
+      toggleSubmit();
+    }
+  };
+
+  const handleAnswerChange = (questId: string, answer: string) => {
+    if (uiState.isFormPublished) {
+      updateQuestion(questId, { answer: answer });
+    }
+  };
 
   useEffect(() => {
     if (!isFormPublished) {
@@ -43,11 +73,6 @@ function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
     }
   }, [form.questions]);
 
-  const handleAnswerChange = (questId: string, answer: string) => {
-    if (uiState.isFormPublished) {
-      updateQuestion(questId, { answer: answer });
-    }
-  };
   return (
     <>
       {isFormPublished ? (
@@ -90,15 +115,17 @@ function FormPreview({ isFormPublished, formData }: FormPreviewProp) {
                   onAnswerChange={(answer: string) =>
                     handleAnswerChange(quest.id, answer)
                   }
-                  isOnlyView={
-                    uiState.isFormPublished || uiState.isFormInPreview
-                  }
+                  isOnlyView={isFormPublished}
+                  isInPreview={uiState.isFormInPreview}
+                  answer={quest.answer}
                 />
               </div>
             ))}
-            {uiState.isFormPublished && !isScrollable ? (
+            {isFormPublished && !isScrollable && !uiState.isSubmitted ? (
               <div className="flex justify-end">
-                <Button variant={"default"}>Submit</Button>
+                <Button variant={"default"} onClick={() => handleSubmit()}>
+                  Submit
+                </Button>
               </div>
             ) : null}
           </div>

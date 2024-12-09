@@ -68,6 +68,10 @@ const FormSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  isSubmitted: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

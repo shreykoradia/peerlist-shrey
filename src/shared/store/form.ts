@@ -14,7 +14,12 @@ export const useFormStore = create<FormProp>((set, get) => ({
   uiState: {
     isFormInPreview: false,
     isFormPublished: false,
-    showBanner: false,
+    isSubmitted: true,
+    showBanner: {
+      message: "",
+      show: false,
+      variant: "success",
+    },
   },
   hydrateForm: (formData: FormResponseObject) =>
     set((state) => ({
@@ -173,9 +178,16 @@ export const useFormStore = create<FormProp>((set, get) => ({
     }
   },
 
-  toggleShowBanner: () =>
+  toggleShowBanner: ({ message, variant }) =>
     set((state) => ({
-      uiState: { ...state.uiState, showBanner: !state.uiState.showBanner },
+      uiState: {
+        ...state.uiState,
+        showBanner: {
+          message: message,
+          show: !state.uiState.showBanner.show,
+          variant: variant,
+        },
+      },
     })),
 
   reorderQuestions: (sourceIndex, destinationIndex) =>
@@ -192,4 +204,33 @@ export const useFormStore = create<FormProp>((set, get) => ({
         },
       };
     }),
+
+  resetForm: () =>
+    set(() => ({
+      form: {
+        id: crypto.randomUUID(),
+        formTitle: "Untitled Form",
+        questions: [],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      uiState: {
+        isFormInPreview: false,
+        isFormPublished: false,
+        isSubmitted: false,
+        showBanner: {
+          message: "",
+          show: false,
+          variant: "success",
+        },
+      },
+    })),
+
+  toggleSubmitMode: () =>
+    set((state) => ({
+      uiState: {
+        ...state.uiState,
+        isSubmitted: true,
+      },
+    })),
 }));

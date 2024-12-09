@@ -36,11 +36,13 @@ const QuestionEditorBody = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & {
     type: (typeof QUESTION_TYPE)[keyof typeof QUESTION_TYPE];
+    answer?: string;
     options?: RadioGroupOptionProp[];
     onOptionsChange?: (updatedOptions: RadioGroupOptionProp[]) => void;
     onAnswerChange?: (answer: string) => void;
     isOnlyView?: boolean;
     isError?: boolean;
+    isInPreview?: boolean;
   }
 >(
   (
@@ -52,6 +54,8 @@ const QuestionEditorBody = React.forwardRef<
       onOptionsChange,
       isOnlyView = false,
       isError = false,
+      answer,
+      isInPreview,
       ...props
     },
     ref
@@ -70,28 +74,40 @@ const QuestionEditorBody = React.forwardRef<
         {type === QUESTION_TYPE.SHORT_ANSWER && (
           <ShortAnswer
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+            answer={answer}
+            isOnlyView={isOnlyView}
+            isInPreview={isInPreview}
           />
         )}
         {type === QUESTION_TYPE.LONG_ANSWER && (
           <LongAnswer
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+            answer={answer}
+            isOnlyView={isOnlyView}
+            isInPreview={isInPreview}
           />
         )}
         {type === QUESTION_TYPE.URL && (
           <URLInput
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+            answer={answer}
+            isOnlyView={isOnlyView}
+            isInPreview={isInPreview}
           />
         )}
         {type === QUESTION_TYPE.NUMBER && (
           <NumberInput
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
+            answer={answer}
+            isOnlyView={isOnlyView}
+            isInPreview={isInPreview}
           />
         )}
-        {type === QUESTION_TYPE.DATE && (
+        {/* {type === QUESTION_TYPE.DATE && (
           <DateInput
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
           />
-        )}
+        )} */}
         {type === QUESTION_TYPE.SINGLE_SELECT && (
           <SingleSelect
             options={options}
@@ -99,6 +115,7 @@ const QuestionEditorBody = React.forwardRef<
             handleAnswerChange={(answer: string) => handleAnswerChange(answer)}
             isOnlyView={isOnlyView}
             isError={isError}
+            isInPreview={isInPreview}
           />
         )}
       </div>

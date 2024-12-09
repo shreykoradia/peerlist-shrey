@@ -6,7 +6,7 @@ import { cn } from "../lib/tailwind-merge";
 import { Button } from "./button";
 
 const bannerVaraints = cva(
-  "fixed z-50 px-4 py-2 border rounded-lg shadow-md flex items-center text-balance justify-between w-[300px] max-w-full transition duration-300 ease-in-out focus:outline-none outline-none",
+  "fixed z-50 px-4 py-2 border rounded-lg shadow-md flex items-center text-balance justify-between w-[250px] max-w-full transition duration-300 ease-in-out focus:outline-none outline-none",
   {
     variants: {
       variant: {
