@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Project Title
 
-First, run the development server:
+A brief description of what this project does and who it's for
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The Form Builder Application is a dynamic tool designed to allow users to create, preview, publish, and fill forms. It supports various question types, including single-select, short text, and long text. Users can manage form data, submit responses, and track completion rates using a robust state management system and a MongoDB-backed API.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Form Creation: Add, update, reorder, and delete form questions.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Preview Mode: Allows users to preview the form without submitting responses.
 
-## Learn More
+- Publish Mode: Forms can be published for users to fill and submit.
 
-To learn more about Next.js, take a look at the following resources:
+- Dynamic Question Types: Supports multiple question types, including single-select with editable options.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Form Completion Tracking: Tracks and displays the percentage of questions answered.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Backend Integration: Save and retrieve forms and responses from a MongoDB database.
 
-## Deploy on Vercel
+- Error Validation: Ensures valid form data during creation and before publishing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Frontend
+
+- Next.js: React framework for building the user interface.
+
+- Zustand: Lightweight state management for managing the form store.
+
+- TypeScript: Ensures type safety across the codebase.
+
+- Tailwind CSS: For styling components.
+
+### Backend
+
+- Next.js API Routes: Handles form and response-related API operations.
+
+- MongoDB: Database for storing forms and responses.
+
+- Mongoose: ODM for MongoDB to handle schema validations.
+
+## Steps to install project locally :)
+
+Clone the repository:
+
+`git clone <repository-url>`
+cd <repository-folder>
+
+Install dependencies:
+
+`npm install`
+
+Create a .env file:
+
+MONGO_URI=<Your MongoDB Connection URI>
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+Run the development server:
+
+`npm run dev`
+
+Open the application in your browser:
