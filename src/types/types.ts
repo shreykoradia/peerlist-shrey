@@ -12,7 +12,7 @@ export type RadioGroupOptionProp = {
   isEditable?: boolean;
 };
 
-type QuestionProp = {
+export type QuestionProp = {
   id: string;
   questionText: string;
   questionDesc: string;

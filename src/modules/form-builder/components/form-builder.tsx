@@ -11,7 +11,7 @@ function FormBuilder() {
   const form = useFormStore((state) => state.form);
   const [isScrollable, setIsScrollable] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
+  console.log({ form });
   useEffect(() => {
     const container = containerRef.current;
     if (container) {

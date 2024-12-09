@@ -41,7 +41,9 @@ function FormFooter({ isScrollable }: FormFooterProp) {
         ) : null}
         <Button
           variant={"default"}
-          className={clsx("gap-1", { " flex-1 mt-2": isScrollable })}
+          className={clsx("gap-1", {
+            " maxMd:flex-1 maxMd:mt-2": isScrollable,
+          })}
           onClick={() => {
             if (form.questions.length === 0) {
               toggleShowBanner();

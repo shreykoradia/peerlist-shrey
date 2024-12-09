@@ -12,6 +12,8 @@
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-radio-group": "^1.2.1",
     "@radix-ui/react-select": "^2.1.2",
+    "dotenv": "^16.4.7",
+    "mongoose": "^8.8.4",
     "next": "15.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
